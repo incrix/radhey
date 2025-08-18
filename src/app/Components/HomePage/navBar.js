@@ -120,7 +120,7 @@ export default function NavBar() {
           <Button
             variant="contained"
             onClick={() => {
-              router.push("");
+              router.push("/Contact");
             }}
             sx={{
               backgroundColor: "var(--secondary)",
@@ -228,7 +228,7 @@ export default function NavBar() {
                 "&:hover": { backgroundColor: "var(--secondary)" },
               }}
               onClick={() => {
-                router.push("");
+                router.push("/Contact");
                 setDrawerOpen(false);
               }}
             >
