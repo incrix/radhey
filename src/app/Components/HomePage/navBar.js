@@ -23,7 +23,7 @@ import { useRouter, usePathname } from "next/navigation";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "About", href: "" },
+  { label: "About", href: "/About" },
   { label: "Shop", href: "" },
 ];
 
@@ -210,7 +210,7 @@ export default function NavBar() {
                 <ShoppingCartIcon fontSize="large" />
               </Badge>
               <Typography
-                sx={{ fontSize: "18px", color: "#000" }}
+                  sx={{ fontSize: "18px", color: "#000" }}
               >
                 Cart
               </Typography>

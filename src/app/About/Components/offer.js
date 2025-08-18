@@ -15,7 +15,7 @@ export default function Offer() {
     <Stack
       sx={{
         px: { xs: 2, md: 6 },
-        py: { xs: 6, md: 10 },
+        py: { xs: 6, md: 5 },
       }}
     >
       <Stack
