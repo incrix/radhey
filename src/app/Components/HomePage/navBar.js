@@ -97,7 +97,7 @@ export default function NavBar() {
           {/* Cart Button with Badge */}
           <IconButton
             color="inherit"
-            onClick={() => router.push("")}
+            onClick={() => router.push("/Cart")}
             sx={{
               color: "var(--secondary)",
               display: "flex",
@@ -201,7 +201,7 @@ export default function NavBar() {
             <IconButton
               color="inherit"
               onClick={() => {
-                router.push("");
+                router.push("/Cart");
                 setDrawerOpen(false);
               }}
               sx={{ color: "var(--secondary)", display: "flex", alignItems: "center", gap: 1.5 }}
