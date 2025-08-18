@@ -1,5 +1,5 @@
 "use client";
-import { Stack } from "@mui/material";
+import Stack from "@mui/material/Stack";
 import logo from "@/public/Images/radheyLogo.svg";
 import green from "@/public/Images/green.png";
 import iso from "@/public/Images/iso.png";
@@ -7,20 +7,21 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer
-      style={{
+    <Stack
+      p={{ xs: 2, md: 4 }}
+      px={{ xs: 2, md: 6 }}
+      sx={{
         width: "100%",
         display: "flex",
         justifyContent: "center",
-        margin: "80px 0 20px 0",
       }}
     >
       <Stack
         width={"100%"}
         gap={2}
-        maxWidth={"var(--max-width)"}
         sx={{
-          px: { xs: "40px", md: 0 }, // padding replaces width < 1480 check
+          maxWidth: "1480px", // optional max width instead of px trick
+          margin: "0 auto",
         }}
       >
         <Stack
@@ -30,14 +31,14 @@ export default function Footer() {
         >
           {/* Logo + About */}
           <Stack maxWidth={"300px"} gap={2}>
-            <Stack direction={"row"} gap={1}>
+            <Stack direction="row" gap={1} alignItems="center">
               <img
                 src={logo.src}
                 style={{
                   width: "80px",
                 }}
               />
-              <Stack direction={"column"}>
+              <Stack>
                 <span
                   style={{
                     fontSize: "24px",
@@ -58,6 +59,7 @@ export default function Footer() {
                 </span>
               </Stack>
             </Stack>
+
             <p>High quality fireworks manufacturer in TamilNadu</p>
           </Stack>
 
@@ -73,9 +75,9 @@ export default function Footer() {
               Company
             </h6>
             <Link href={"/"}>Home</Link>
-            <Link href={"/shop"}>Shop</Link>
-            <Link href={"/factory"}>Factory</Link>
-            <Link href={"/contact"}>Contact Us</Link>
+            <Link href={""}>About</Link>
+            <Link href={""}>Shop</Link>
+            <Link href={""}>Contact Us</Link>
           </Stack>
 
           {/* Categories */}
@@ -89,14 +91,18 @@ export default function Footer() {
             >
               Categories
             </h6>
-            <Link href={"/shop?category=Flower%20Pots#product"}>Flowerpots</Link>
+            <Link href={"/shop?category=Flower%20Pots#product"}>
+              Flowerpots
+            </Link>
             <Link href={"/shop?category=Ground%20Chakkars#product"}>
               Ground Chakkar
             </Link>
             <Link href={"/shop?category=One%20Sound#product"}>One Sound</Link>
             <Link href={"/shop?category=Special%27s#product"}>Special’s</Link>
             <Link href={"/shop?category=Rockets#product"}>Rocket</Link>
-            <Link href={"/shop?category=Repeating%20shots#product"}>Aerials</Link>
+            <Link href={"/shop?category=Repeating%20shots#product"}>
+              Aerials
+            </Link>
             <Link href={"/shop?category=Atom%20bombs#product"}>Bombs</Link>
             <Link href={"/shop?category=Twinklers#product"}>Twinklers</Link>
           </Stack>
@@ -132,9 +138,9 @@ export default function Footer() {
         <hr />
 
         {/* Bottom Bar */}
-        <Stack flexDirection={"row"} justifyContent={"space-between"}>
+        <Stack flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"} >
           <p>
-            © 2024,{" "}
+            © 2025,{" "}
             <span
               style={{
                 color: "var(--primary-color)",
@@ -142,7 +148,7 @@ export default function Footer() {
                 display: "inline",
               }}
             >
-              Sankamithra Fireworks
+              Radhey Fireworks
             </span>
             <br />
             All rights reserved
@@ -159,6 +165,6 @@ export default function Footer() {
           </p>
         </Stack>
       </Stack>
-    </footer>
+    </Stack>
   );
 }

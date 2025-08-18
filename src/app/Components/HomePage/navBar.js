@@ -131,7 +131,7 @@ export default function NavBar() {
             }}
             disableElevation
           >
-            Contact
+            Contact Us
           </Button>
         </Box>
 
@@ -232,7 +232,7 @@ export default function NavBar() {
                 setDrawerOpen(false);
               }}
             >
-              Contact
+              Contact Us
             </CustomButton>
           </Box>
         </List>
