@@ -3,6 +3,7 @@ import NavBar from "@/src/app/Components/HomePage/navBar";
 import HeroCarousel from "@/src/app/Components/HomePage/heroCarousel";
 import AboutUs from "@/src/app/Components/HomePage/aboutUs";
 import DoDont from "@/src/app/Components/HomePage/doDont";
+import Offer from "@/src/app/Components/HomePage/offer";
 import Footer from "@/src/app/Components/HomePage/footer";
 
 export default function MyHome() {
@@ -12,6 +13,7 @@ export default function MyHome() {
       <HeroCarousel />
       <DoDont />
       <AboutUs />
+      <Offer />
       <Footer />
     </Stack>
   );
