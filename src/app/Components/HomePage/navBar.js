@@ -42,7 +42,7 @@ export default function NavBar() {
         backgroundColor: "#fff",
         px: { xs: 2, md: 6 },
         py: 1.5,
-        height: { xs: 60, md: 50 },
+        height: { xs: 60, md: 80 },
       }}
     >
       <Toolbar
@@ -58,7 +58,7 @@ export default function NavBar() {
           sx={{ display: "flex", alignItems: "center", gap: { md: 6, xs: 0 } }}
         >
           {/* Logo */}
-          <Image src={Logo.src} alt="Ponnus" width={80} height={80} />
+          <Image src={Logo.src} alt="Ponnus" width={80} height={70} />
 
           {/* Desktop Nav Links */}
           <Box
