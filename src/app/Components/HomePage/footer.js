@@ -139,15 +139,17 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <Stack
-          flexDirection="row"
+          flexDirection={{ xs: "column", md: "row" }}
           justifyContent="space-between"
-          alignItems="center"
+          alignItems={{ xs: "center", md: "center" }}
+          spacing={{ xs: 2, md: 0 }}
+          sx={{ textAlign: { xs: "center", md: "left" }, mt: 3 }}
         >
-          <p>
+          <p style={{ margin: 0 }}>
             © {new Date().getFullYear()},{" "}
             <span
               style={{
-                color: "var(--primary-color)",
+                color: "var(--primary)",
                 fontWeight: "600",
                 display: "inline",
               }}
@@ -157,16 +159,23 @@ export default function Footer() {
             <br />
             All rights reserved
           </p>
-          <p>
-            Designed by{" "}
-            <a href="https://incrix.com/" target="_blank">
-              <img
-                style={{ width: "80px" }}
-                src="https://incrix.com/logo.png"
-                alt="Incrix Logo"
-              />
-            </a>
-          </p>
+
+          <Stack>
+            <p style={{ margin: 0 }}>
+              Designed by{" "}
+              <a
+                href="https://incrix.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  style={{ width: "80px" }}
+                  src="https://incrix.com/logo.png"
+                  alt="Incrix Logo"
+                />
+              </a>
+            </p>
+          </Stack>
         </Stack>
       </Stack>
     </Stack>
