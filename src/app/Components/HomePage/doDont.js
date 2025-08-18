@@ -78,13 +78,13 @@ export default function DoDont() {
               borderRadius: 3,
               mt: 4,
               pt: 10,
-              height: { xs: "100%", md: "630px" },
+              height: { xs: "100%", md: "auto", lg: "630px" },
               lineHeight: 1.5,
             }}
           >
             <Stack direction="row" spacing={2} alignItems="center">
               <Store
-                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 24 } }}
+                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 18,lg:24 } }}
               />
               <Typography fontSize={{ xs: 12, md: 24 }}>
                 Purchase Fireworks from Licensed merchants.
@@ -93,7 +93,7 @@ export default function DoDont() {
 
             <Stack direction="row" spacing={2} alignItems="center">
               <SupervisedUserCircle
-                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 24 } }}
+                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 18,lg:24 } }}
               />
               <Typography fontSize={{ xs: 12, md: 24 }}>
                 Have a responsible adult in charge.
@@ -102,7 +102,7 @@ export default function DoDont() {
 
             <Stack direction="row" spacing={2} alignItems="center">
               <CleaningServices
-                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 24 } }}
+                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 18,lg:24 } }}
               />
               <Typography fontSize={{ xs: 12, md: 24 }}>
                 Prepare a safe, outdoor environment clear of dried wood, grass
@@ -112,7 +112,7 @@ export default function DoDont() {
 
             <Stack direction="row" spacing={2} alignItems="center">
               <Opacity
-                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 24 } }}
+                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 18,lg:24 } }}
               />
               <Typography fontSize={{ xs: 12, md: 24 }}>
                 Have water (hose, bucket or pump) readily available in case of
@@ -122,7 +122,7 @@ export default function DoDont() {
 
             <Stack direction="row" spacing={2} alignItems="center">
               <Whatshot
-                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 24 } }}
+                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 18,lg:24 } }}
               />
               <Typography fontSize={{ xs: 12, md: 24 }}>
                 Light fireworks one at a time and away from your body.
@@ -131,7 +131,7 @@ export default function DoDont() {
 
             <Stack direction="row" spacing={2} alignItems="center">
               <MenuBook
-                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 24 } }}
+                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 18,lg:24 } }}
               />
               <Typography fontSize={{ xs: 12, md: 24 }}>
                 Display fireworks as per the warnings and instructions on the
@@ -184,13 +184,13 @@ export default function DoDont() {
               borderRadius: 3,
               mt: 4,
               pt: 12,
-              height: { xs: "100%", md: "630px" },
+              height: { xs: "100%", md: "auto", lg: "630px" },
               lineHeight: 1.5,
             }}
           >
             <Stack direction="row" spacing={2} alignItems="center">
               <Science
-                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 24 } }}
+                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 18,lg:24 } }}
               />
               <Typography fontSize={{ xs: 12, md: 24 }}>
                 Never discharge illegal fireworks.
@@ -199,7 +199,7 @@ export default function DoDont() {
 
             <Stack direction="row" spacing={2} alignItems="center">
               <Group
-                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 24 } }}
+                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 18,lg:24 } }}
               />
               <Typography fontSize={{ xs: 12, md: 24 }}>
                 Never give fireworks to children.
@@ -208,7 +208,7 @@ export default function DoDont() {
 
             <Stack direction="row" spacing={2} alignItems="center">
               <LocalFireDepartment
-                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 24 } }}
+                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 18,lg:24 } }}
               />
               <Typography fontSize={{ xs: 12, md: 24 }}>
                 Never try to extinguish live fireworks that are on fire.
@@ -217,7 +217,7 @@ export default function DoDont() {
 
             <Stack direction="row" spacing={2} alignItems="center">
               <Checkroom
-                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 24 } }}
+                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 18,lg:   24 } }}
               />
               <Typography fontSize={{ xs: 12, md: 24 }}>
                 Never carry fireworks in your pocket.
@@ -226,7 +226,7 @@ export default function DoDont() {
 
             <Stack direction="row" spacing={2} alignItems="center">
               <Pets
-                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 24 } }}
+                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 18,lg:24 } }}
               />
               <Typography fontSize={{ xs: 12, md: 24 }}>
                 Do not point fireworks on people or animals.
@@ -235,7 +235,7 @@ export default function DoDont() {
 
             <Stack direction="row" spacing={2} alignItems="center">
               <WineBar
-                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 24 } }}
+                sx={{ color: "var(--secondary)", fontSize: { xs: 12, md: 18,lg:24 } }}
               />
               <Typography fontSize={{ xs: 12, md: 24 }}>
                 Never use metal or glass containers to launch fireworks.

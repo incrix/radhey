@@ -38,7 +38,6 @@ export default function Offer() {
             py: 1,
             borderRadius: 5,
             my: { xs: 4, md: 0 },
-
           }}
         >
           <CircleIcon
@@ -56,6 +55,7 @@ export default function Offer() {
             WHAT I OFFER
           </Typography>
         </Stack>
+
         <Typography
           variant="h4"
           fontWeight="bold"
@@ -65,17 +65,22 @@ export default function Offer() {
           Igniting Celebrations <br /> Through Quality
         </Typography>
 
-        {/* 3 Boxes Row */}
-        <Stack
-          direction={{ xs: "column", md: "row" }}
-          spacing={4}
-          justifyContent="center"
-          alignItems="stretch"
+        {/* ✅ Responsive Grid for 3 Boxes */}
+        <Box
+          sx={{
+            display: "grid",
+            gap: 4,
+            gridTemplateColumns: {
+              xs: "1fr", // 1 per row mobile
+              sm: "1fr 1fr", // 2 per row tablet
+              md: "1fr 1fr ", // 3 per row desktop
+              lg: "1fr 1fr 1fr ", // 4 per row large desktop
+            },
+          }}
         >
           {/* Retail Excellence */}
           <Box
             sx={{
-              flex: 1,
               backgroundColor: "var(--primary)",
               borderRadius: "16px",
               p: 4,
@@ -83,10 +88,9 @@ export default function Offer() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
-              height: { xs: "auto", md: "750px" },
+              minHeight: { xs: "auto", md: "750px" },
             }}
           >
-            {/* Center Image */}
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Image
                 src={RetailBoxes}
@@ -124,7 +128,7 @@ export default function Offer() {
                   key={index}
                   sx={{
                     pb: 1,
-                    borderBottom: "1px solid rgba(255,255,255,0.7)", // line below
+                    borderBottom: "1px solid rgba(255,255,255,0.7)",
                     fontSize: { xs: "16px", md: "18px" },
                   }}
                 >
@@ -151,7 +155,6 @@ export default function Offer() {
           {/* Wholesale */}
           <Box
             sx={{
-              flex: 1,
               backgroundColor: "white",
               borderRadius: "16px",
               p: 4,
@@ -159,7 +162,7 @@ export default function Offer() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
-              height: { xs: "auto", md: "750px" },
+              minHeight: { xs: "auto", md: "750px" },
             }}
           >
             <Typography
@@ -175,6 +178,7 @@ export default function Offer() {
               Supporting businesses & event organizers with reliable bulk supply
               and seamless service.
             </Typography>
+
             <Stack spacing={2} sx={{ mt: { xs: 5, md: 5 } }}>
               {[
                 "Competitive Bulk Pricing",
@@ -185,7 +189,7 @@ export default function Offer() {
                   key={index}
                   sx={{
                     pb: 1,
-                    borderBottom: "1px solid rgba(45, 43, 43, 0.7)", // line below
+                    borderBottom: "1px solid rgba(45, 43, 43, 0.7)",
                     fontSize: { xs: "16px", md: "18px" },
                   }}
                 >
@@ -194,14 +198,15 @@ export default function Offer() {
               ))}
             </Stack>
 
-            <Stack sx={{ mt: 7 }}>
+            <Stack sx={{ mt: 7, alignItems: "center" }}>
               <Image
                 src={WholeSale}
                 alt="Wholesale"
                 width={300}
-                style={{ borderRadius: "8px" }}
+                style={{ borderRadius: "8px", maxWidth: "100%" }}
               />
             </Stack>
+
             <Button
               disableElevation
               variant="contained"
@@ -221,7 +226,6 @@ export default function Offer() {
           {/* Memorable Moments */}
           <Box
             sx={{
-              flex: 1,
               backgroundColor: "#2E2E2E",
               borderRadius: "16px",
               p: 4,
@@ -229,7 +233,7 @@ export default function Offer() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
-              height: { xs: "auto", md: "750px" },
+              minHeight: { xs: "auto", md: "750px" },
             }}
           >
             <Typography
@@ -246,6 +250,7 @@ export default function Offer() {
               craft unforgettable celebrations with fireworks that light up the
               skies — and smiles all around.
             </Typography>
+
             <Stack spacing={2} sx={{ mt: { xs: 5, md: 20 } }}>
               {[
                 "Signature Showstopper Pieces",
@@ -256,7 +261,7 @@ export default function Offer() {
                   key={index}
                   sx={{
                     pb: 1,
-                    borderBottom: "1px solid rgba(183, 182, 182, 0.7)", // line below
+                    borderBottom: "1px solid rgba(183, 182, 182, 0.7)",
                     fontSize: { xs: "16px", md: "18px" },
                   }}
                 >
@@ -264,6 +269,7 @@ export default function Offer() {
                 </Typography>
               ))}
             </Stack>
+
             <Button
               disableElevation
               variant="contained"
@@ -279,7 +285,7 @@ export default function Offer() {
               Consultation
             </Button>
           </Box>
-        </Stack>
+        </Box>
       </Stack>
     </Stack>
   );
