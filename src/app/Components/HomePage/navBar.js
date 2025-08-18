@@ -2,6 +2,7 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -11,6 +12,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Badge from "@mui/material/Badge";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -26,6 +29,7 @@ const navLinks = [
 
 export default function NavBar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(1);
   const router = useRouter();
   const toggleDrawer = (open) => () => setDrawerOpen(open);
   const pathname = usePathname();
@@ -50,7 +54,9 @@ export default function NavBar() {
         }}
       >
         {/* ---------- LEFT (Logo + Links on Desktop) ---------- */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: { md: 6, xs: 0 } }}>
+        <Box
+          sx={{ display: "flex", alignItems: "center", gap: { md: 6, xs: 0 } }}
+        >
           {/* Logo */}
           <Image src={Logo.src} alt="Ponnus" width={80} height={80} />
 
@@ -80,8 +86,37 @@ export default function NavBar() {
           </Box>
         </Box>
 
-        {/* ---------- RIGHT (Button on Desktop) ---------- */}
-        <Box sx={{ display: { xs: "none", md: "block" } }}>
+        {/* ---------- RIGHT (Cart + Contact on Desktop) ---------- */}
+        <Box
+          sx={{
+            display: { xs: "none", md: "flex" },
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          {/* Cart Button with Badge */}
+          <IconButton
+            color="inherit"
+            onClick={() => router.push("")}
+            sx={{
+              color: "var(--secondary)",
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+            }}
+          >
+            <Badge badgeContent={cartCount} color="error">
+              <ShoppingCartIcon />
+            </Badge>
+            <Typography
+              variant="body2"
+              sx={{ fontSize: "16px", color: "#000" }}
+            >
+              Cart
+            </Typography>
+          </IconButton>
+
+          {/* Contact Button */}
           <Button
             variant="contained"
             onClick={() => {
@@ -96,7 +131,7 @@ export default function NavBar() {
             }}
             disableElevation
           >
-            Get in Touch
+            Contact
           </Button>
         </Box>
 
@@ -161,22 +196,43 @@ export default function NavBar() {
             </ListItem>
           ))}
 
-          {/* Drawer Button */}
+          {/* 🔹 Cart Button ABOVE Contact in mobile */}
+          <Box sx={{ mt: 3 }}>
+            <IconButton
+              color="inherit"
+              onClick={() => {
+                router.push("");
+                setDrawerOpen(false);
+              }}
+              sx={{ color: "var(--secondary)", display: "flex", alignItems: "center", gap: 1.5 }}
+            >
+              <Badge badgeContent={cartCount} color="error">
+                <ShoppingCartIcon fontSize="large" />
+              </Badge>
+              <Typography
+                sx={{ fontSize: "18px", color: "#000" }}
+              >
+                Cart
+              </Typography>
+            </IconButton>
+          </Box>
+
+          {/* Contact Button */}
           <Box sx={{ mt: 2 }}>
             <CustomButton
               sx={{
-                backgroundColor: "#000",
+                backgroundColor: "var(--secondary)",
                 color: "#fff",
-                borderRadius: "30px",
+                borderRadius: "10px",
                 textTransform: "none",
-                "&:hover": { backgroundColor: "#222" },
+                "&:hover": { backgroundColor: "var(--secondary)" },
               }}
               onClick={() => {
                 router.push("");
                 setDrawerOpen(false);
               }}
             >
-              Get in Touch
+              Contact
             </CustomButton>
           </Box>
         </List>

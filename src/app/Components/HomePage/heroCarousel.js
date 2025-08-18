@@ -26,7 +26,7 @@ export default function HeroCarousel() {
       sx={{
         px: { xs: 0, md: 3 },
         mx: { xs: 2, md: 3 },
-        mt: { xs: 12, md: 14 },
+        mt: { xs: 12, md: 12 },
       }}
     >
       <Stack
