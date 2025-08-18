@@ -24,9 +24,9 @@ import { useRouter, usePathname } from "next/navigation";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/About" },
-  { label: "Shop", href: "" },
+  { label: "Shop", href: "/Shop" },
 ];
-
+  
 export default function NavBar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [cartCount, setCartCount] = useState(1);
