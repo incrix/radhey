@@ -138,9 +138,13 @@ export default function Footer() {
         <hr />
 
         {/* Bottom Bar */}
-        <Stack flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"} >
+        <Stack
+          flexDirection="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <p>
-            © 2025,{" "}
+            © {new Date().getFullYear()},{" "}
             <span
               style={{
                 color: "var(--primary-color)",
