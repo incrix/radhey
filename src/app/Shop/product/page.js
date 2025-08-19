@@ -15,6 +15,7 @@ import ProductCard from "@/src/app/Shop/Components/productCard";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import NavBar from "@/src/app/Components/HomePage/navBar";
 import Footer from "@/src/app/Components/HomePage/footer";
+import Image from "next/image";
 
 export default function Product() {
   const searchParams = useSearchParams();
@@ -28,29 +29,27 @@ export default function Product() {
     let productFromLocalStorage = JSON.parse(
       localStorage.getItem("productList")
     );
-    if (
-      productFromLocalStorage == null ||
-      productFromLocalStorage.length === 0
-    ) {
+    if (!productFromLocalStorage || productFromLocalStorage.length === 0) {
       fetch("https://e-com.incrix.com/Sankamithra%20Products/productData.json")
         .then((response) => response.json())
         .then((data) => {
           localStorage.setItem("productList", JSON.stringify(data));
-          setProduct(data.filter((product) => product.id == search)[0]);
+          setProduct(data.find((product) => product.id == search));
           setProductList(data);
         });
     } else {
       setProduct(
-        productFromLocalStorage.filter((product) => product.id == search)[0]
+        productFromLocalStorage.find((product) => product.id == search)
       );
       setProductList(productFromLocalStorage);
     }
-  }, []);
+  }, [search]);
 
   useEffect(() => {
-    productList.length !== 0 &&
-      setProduct(productList.filter((product) => product.id == search)[0]);
-  }, [search]);
+    if (productList.length !== 0) {
+      setProduct(productList.find((product) => product.id == search));
+    }
+  }, [search, productList]);
 
   return (
     <Stack>
@@ -130,10 +129,12 @@ export default function Product() {
                     renderThumbs={(children) =>
                       children.map((item) => {
                         return (
-                          <img
+                          <Image
                             key={item}
                             src={item.props.children.props.src}
-                            alt=""
+                            alt="thumb"
+                            width={80}
+                            height={80}
                           />
                         );
                       })
@@ -147,10 +148,13 @@ export default function Product() {
                             width: "100%",
                           }}
                         >
-                          <img
+                          <Image
+                            key={index}
                             src={`https://e-com.incrix.com/Sankamithra%20Products/${image}`}
                             alt={product.name}
-                            layout="responsive"
+                            width={800} // provide dimensions
+                            height={600}
+                            style={{ width: "100%", height: "auto" }}
                           />
                         </div>
                       );
