@@ -18,17 +18,17 @@ import Badge from "@mui/material/Badge";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import Logo from "@/public/Images/radheyLogo.svg";
+import Logo from "@/public/Images/radheyLogo.png";
 import CustomButton from "@/src/app/Ui/Button/Button";
 import { useRouter, usePathname } from "next/navigation";
-import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
+import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/About" },
   { label: "Shop", href: "/Shop" },
 ];
-  
+
 export default function NavBar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [cartCount, setCartCount] = useState(1);
@@ -59,7 +59,7 @@ export default function NavBar() {
         backgroundColor: "#fff",
         px: { xs: 2, md: 6 },
         py: 1.5,
-        height: { xs: 60, md: 80 },
+        height: { xs: 70, md: 80 },
       }}
     >
       <Toolbar
@@ -75,7 +75,14 @@ export default function NavBar() {
           sx={{ display: "flex", alignItems: "center", gap: { md: 6, xs: 0 } }}
         >
           {/* Logo */}
-          <Image src={Logo.src} alt="Ponnus" width={80} height={70} />
+          <Image
+            onClick={() => router.push("/")}
+            src={Logo.src}
+            alt="Ponnus"
+            width={45}
+            height={50}
+            style={{ cursor: "pointer" }}
+          />
 
           {/* Desktop Nav Links */}
           <Box
@@ -222,14 +229,17 @@ export default function NavBar() {
                 router.push("/Cart");
                 setDrawerOpen(false);
               }}
-              sx={{ color: "var(--secondary)", display: "flex", alignItems: "center", gap: 1.5 }}
+              sx={{
+                color: "var(--secondary)",
+                display: "flex",
+                alignItems: "center",
+                gap: 1.5,
+              }}
             >
               <Badge badgeContent={cartCount} color="error">
                 <ShoppingCartIcon fontSize="large" />
               </Badge>
-              <Typography
-                  sx={{ fontSize: "18px", color: "#000" }}
-              >
+              <Typography sx={{ fontSize: "18px", color: "#000" }}>
                 Cart
               </Typography>
             </IconButton>
