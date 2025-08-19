@@ -20,7 +20,7 @@ export default function ShopByCategory() {
   const searchParams = useSearchParams();
   const category = searchParams.get("category");
   useEffect(() => {
-    console.log(category);
+    // console.log(category);
   }, [category]);
   const catList = [
     {

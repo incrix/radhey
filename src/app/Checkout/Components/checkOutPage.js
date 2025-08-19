@@ -458,7 +458,7 @@ function BillingDetails({
   billingDetails,
   onBillingDetailsChange,
 }) {
-  console.log(billingDetails);
+  // console.log(billingDetails);
 
   return (
     <Stack gap={5}>

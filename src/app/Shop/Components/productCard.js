@@ -69,7 +69,7 @@ export default function ProductCard({ product }) {
     if (item) {
       setIsAdded(true);
       setCount(item.count);
-      console.log(item.count);
+      // console.log(item.count);
     } else {
       setIsAdded(false);
       setCount(1);
