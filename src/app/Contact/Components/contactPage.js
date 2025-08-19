@@ -1,3 +1,5 @@
+"use client";
+
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -6,6 +8,7 @@ import { CallButton, WhatsappButton } from "./clientComp";
 import ContactPng from "@/public/Images/contactImage.png";
 import { Quicksand } from "next/font/google";
 const quicksand = Quicksand({ subsets: ["latin"] });
+import Image from "next/image";
 
 export default function ContactPage() {
   return (
@@ -234,7 +237,12 @@ function ContactForm() {
           md: "40%",
         }}
       >
-        <img src={ContactPng.src} style={{ width: "100%" }} />
+         <Image
+          src={ContactPng}
+          alt="Contact illustration" // meaningful alt text
+          style={{ width: "100%", height: "auto" }}
+          placeholder="blur" // optional: adds blur placeholder
+        />
       </Stack>
     </Stack>
   );

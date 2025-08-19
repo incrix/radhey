@@ -10,6 +10,7 @@ import special from "@/public/Images/special.png";
 import bomb from "@/public/Images/bomb.png";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const CatButton = ({ title, img, count, link }) => {
   const router = useRouter();
@@ -35,12 +36,12 @@ const CatButton = ({ title, img, count, link }) => {
         router.push(`/Shop?category=${link}`);
       }}
     >
-      <img
-        src={img.src}
+      <Image
+        src={img}
         alt={title}
-        style={{
-          width: "30px",
-        }}
+        width={30}
+        height={30}
+        style={{ objectFit: "contain" }}
       />
       <p style={{ fontSize: "14px", fontWeight: "600" }}>{title}</p>
       <Stack
