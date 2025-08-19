@@ -115,7 +115,7 @@ export default function Page() {
         flexDirection: "column",
         alignItems: "center",
         width: "100%",
-        padding: "0 40px",
+        padding: { xs: 0, md: 3 },
       }}
     >
       <Snackbar

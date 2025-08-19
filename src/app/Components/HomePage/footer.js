@@ -166,8 +166,8 @@ export default function Footer() {
                 <Image
                   src="https://incrix.com/logo.png"
                   alt="Incrix Logo"
-                  width={80}
-                  height={30}
+                  width={120}
+                  height={25}
                 />
               </a>
             </p>

@@ -14,7 +14,7 @@ export default function Checkout() {
       <Stack
          sx={{
             px: { xs: 0, md: 3 },
-            mx: { xs: 2, md: 3 },
+            mx: { xs: 1, md: 3 },
             mt: { xs: 12, md: 12 },
           }}
       >

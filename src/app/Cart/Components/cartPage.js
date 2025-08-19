@@ -69,13 +69,13 @@ export default function CartPage() {
   };
 
   return (
-    <main
-      style={{
+    <Stack
+      sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         width: "100%",
-        padding: "0 40px",
+        padding: { xs: 0, md: 3 },
       }}
     >
       <Stack
@@ -332,6 +332,6 @@ export default function CartPage() {
           </Stack>
         </Stack>
       </Stack>
-    </main>
+    </Stack>
   );
 }

@@ -7,7 +7,13 @@ export default function Cart() {
   return (
     <Stack>
       <NavBar />
+      <Stack sx={{
+        px: { xs: 0, md: 3 },
+        mx: { xs: 1, md: 3 },
+        mt: { xs: 12, md: 12 },
+      }}>
       <CartPage />
+      </Stack>
       <Footer />
     </Stack>
   );
