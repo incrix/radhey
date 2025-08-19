@@ -117,7 +117,7 @@ export default function ShopByCategory() {
         }}
         justifyContent={{
           xs: "center",
-          sm: "flex-start",
+          sm: "center",
         }}
         sx={{
           display: "flex",
