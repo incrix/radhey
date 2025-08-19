@@ -165,9 +165,9 @@ export default function CartPage() {
                               fontWeight: "bold",
                               width: "30px",
                               height: "30px",
-                              backgroundColor: "var(--text-color-trinary)",
+                              backgroundColor: "var(--secondary)",
                               "&:hover": {
-                                backgroundColor: "var(--text-color-trinary)",
+                                backgroundColor: "var(--secondary)",
                               },
                             }}
                             onClick={() => handleIncrement(index)}
@@ -195,9 +195,9 @@ export default function CartPage() {
                               fontWeight: "bold",
                               width: "30px",
                               height: "30px",
-                              backgroundColor: "var(--text-color-trinary)",
+                              backgroundColor: "var(--secondary)",
                               "&:hover": {
-                                backgroundColor: "var(--text-color-trinary)",
+                                backgroundColor: "var(--secondary)",
                               },
                             }}
                             onClick={() => handleDecrement(index)}
@@ -300,7 +300,7 @@ export default function CartPage() {
                         textDecoration: "none",
                         color: "white",
                       }}
-                      href="/checkout"
+                      href="/Checkout"
                     >
                       Proceed to Checkout
                     </Link>
@@ -321,7 +321,7 @@ export default function CartPage() {
                         textDecoration: "none",
                         color: "var(--primary)",
                       }}
-                      href="/shop"
+                      href="/Shop"
                     >
                       Continue Shopping
                     </Link>

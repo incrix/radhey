@@ -146,11 +146,11 @@ export default function ProductCard({ product }) {
             }}
             src={`https://e-com.incrix.com/Sankamithra%20Products/${product.image[0]}`}
             alt="pr"
-            width={"100%"}
-            height={"100%"}
-            objectFit="cover"
-            objectPosition="center"
             style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
               borderRadius: "10px",
               cursor: "pointer",
             }}

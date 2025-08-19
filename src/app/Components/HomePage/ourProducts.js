@@ -1,28 +1,38 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import ProductCard from "@/src/app/Shop/Components/productCard";
+import { useRouter } from "next/navigation";
 
 export default function OurProducts() {
-  const [value, setValue] = useState(0);
+  const [productList, setProductList] = useState([]);
+  const router = useRouter();
+  useEffect(() => {
+    fetch("https://e-com.incrix.com/Sankamithra%20Products/productData.json")
+      .then((response) => response.json())
+      .then((data) => {
+        data.sort((a, b) => a.sku - b.sku);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+        // Group by category
+        const grouped = data.reduce((acc, product) => {
+          if (!acc[product.category]) acc[product.category] = [];
+          acc[product.category].push(product);
+          return acc;
+        }, {});
 
-  const categories = [
-    "Flower Pots",
-    "Ground Chakkar",
-    "One Sound",
-    "Special's",
-    "Rockets",
-    "Aerials",
-    "Bombs",
-    "Twinklers",
-  ];
+        // Pick 2 products per category
+        let selectedProducts = [];
+        Object.keys(grouped).forEach((category) => {
+          selectedProducts.push(...grouped[category].slice(0, 2));
+        });
+
+        // Limit to max 10 products
+        setProductList(selectedProducts.slice(0, 12));
+      });
+  }, []);
 
   return (
     <Stack
@@ -50,53 +60,44 @@ export default function OurProducts() {
         </Typography>
       </Stack>
 
-      {/* Product Tabs */}
-      <Box
-        sx={{
-          mt: 4,
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <Box
+      {/* Products Grid */}
+      <Stack>
+        <Grid container spacing={2} sx={{ mt: 4, justifyContent: "center" }}>
+          {productList.map((product, index) => (
+            <Grid item xs={12} sm={6} md={3} key={index}>
+              <ProductCard product={product} />
+            </Grid>
+          ))}
+        </Grid>
+        <Stack
           sx={{
-            borderRadius: "50px",
-            bgcolor: "var(--category-color)",
-            p: { xs: 1, md: 1 },
+            mt: 4,
+            justifyContent: { xs: "center", md: "right" },
+            alignItems: { xs: "center", md: "right" },
+            display: "flex",
+            flexDirection: "row",
+            gap: "10px",
+            marginRight: { xs: "0", md: "85px" },
           }}
         >
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            variant="scrollable"
-            scrollButtons
-            allowScrollButtonsMobile
-            TabIndicatorProps={{ style: { display: "none" } }} // hide underline
+          <Button
+            onClick={() => router.push("/Shop")}
             sx={{
-              "& .MuiTab-root": {
-                textTransform: "none",
-                borderRadius: "50px",
-                px: { xs: 2, md: 3 },
-                mx: { xs: 0.5, md: 1 },
-                minHeight: "40px",
-                fontSize: { xs: "12px", md: "16px" },
-                fontWeight: 500,
-                color: "black",
-                transition: "all 0.3s ease", // smooth hover + active
-              },
-              "& .Mui-selected": {
-                bgcolor: "var(--secondary)",
-                color: "#fff !important",
-                transition: "all 0.3s ease", // smooth active change
+              width: "fit-content",
+              textTransform: "capitalize",
+              borderRadius: "10px",
+              fontSize: "16px",
+              backgroundColor: "var(--primary)",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "var(--primary)",
               },
             }}
           >
-            {categories.map((cat, index) => (
-              <Tab key={index} label={cat} />
-            ))}
-          </Tabs>
-        </Box>
-      </Box>
+            View All Products
+          </Button>
+        </Stack>
+      </Stack>
     </Stack>
   );
 }
