@@ -11,15 +11,19 @@ export default function Shop() {
   const category = searchParams.get("category");
   console.log(category);
   return (
-    <Stack sx={{
-      px: { xs: 0, md: 3 },
-      mx: { xs: 2, md: 3 },
-      mt: { xs: 12, md: 12 },
-    }}>
+    <Stack
+      sx={{
+        px: { xs: 0, md: 3 },
+        mx: { xs: 2, md: 3 },
+        mt: { xs: 12, md: 12 },
+      }}
+    >
       <NavBar />
       <ShopByCategory />
       <ProductTab category={category} />
-      <Footer />
+      <Stack mt={{ xs: 10, md: 10 }}>
+        <Footer />
+      </Stack>
     </Stack>
   );
 }

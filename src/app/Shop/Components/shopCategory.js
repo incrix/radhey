@@ -106,8 +106,16 @@ export default function ShopByCategory() {
         >
           Shop By Categories
         </Typography>
-        <Link href={"/shop"}>
-          <span style={{ fontSize: "16px" }}>All Categories</span>
+        <Link href={"/Shop"}>
+          <span
+            style={{
+              fontSize: "16px",
+              color: "var(--secondary)",
+              fontWeight: "bold",
+            }}
+          >
+            All Categories
+          </span>
         </Link>
       </Stack>
       <Stack
@@ -174,8 +182,8 @@ const CatCard = ({ title, imgURL, url, isSelected }) => {
       }}
       onClick={() => {
         !url
-          ? router.push("/shop#product")
-          : router.push("/shop?category=" + url + "#product");
+          ? router.push("/Shop#product")
+          : router.push("/Shop?category=" + url + "#product");
       }}
     >
       <Image

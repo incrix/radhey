@@ -142,7 +142,7 @@ export default function ProductCard({ product }) {
             onClick={() => {
               pathArray.length > 2
                 ? router.push(`product?id=${product.id}`)
-                : router.push(`shop/product?id=${product.id}`);
+                : router.push(`Shop/product?id=${product.id}`);
             }}
             src={`https://e-com.incrix.com/Sankamithra%20Products/${product.image[0]}`}
             alt="pr"
