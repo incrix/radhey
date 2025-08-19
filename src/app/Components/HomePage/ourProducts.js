@@ -20,6 +20,8 @@ export default function OurProducts() {
     "Special's",
     "Rockets",
     "Aerials",
+    "Bombs",
+    "Twinklers",
   ];
 
   return (
