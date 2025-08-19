@@ -1,4 +1,5 @@
 "use client";
+
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
@@ -16,7 +17,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Logo from "@/public/Images/radheyLogo.svg";
 import CustomButton from "@/src/app/Ui/Button/Button";
 import { useRouter, usePathname } from "next/navigation";
@@ -33,6 +34,21 @@ export default function NavBar() {
   const router = useRouter();
   const toggleDrawer = (open) => () => setDrawerOpen(open);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setCartCount(
+      localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart")).length
+        : 0
+    );
+    setInterval(() => {
+      setCartCount(
+        localStorage.getItem("cart")
+          ? JSON.parse(localStorage.getItem("cart")).length
+          : 0
+      );
+    }, 500);
+  }, []);
 
   return (
     <AppBar
