@@ -21,6 +21,7 @@ import { useState, useEffect } from "react";
 import Logo from "@/public/Images/radheyLogo.svg";
 import CustomButton from "@/src/app/Ui/Button/Button";
 import { useRouter, usePathname } from "next/navigation";
+import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -134,6 +135,7 @@ export default function NavBar() {
 
           {/* Contact Button */}
           <Button
+            endIcon={<PhoneInTalkIcon />}
             variant="contained"
             onClick={() => {
               router.push("/Contact");
@@ -236,6 +238,7 @@ export default function NavBar() {
           {/* Contact Button */}
           <Box sx={{ mt: 2 }}>
             <CustomButton
+              endIcon={<PhoneInTalkIcon />}
               sx={{
                 backgroundColor: "var(--secondary)",
                 color: "#fff",
