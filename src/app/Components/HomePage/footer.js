@@ -75,9 +75,9 @@ export default function Footer() {
               Company
             </h6>
             <Link href={"/"}>Home</Link>
-            <Link href={""}>About</Link>
-            <Link href={""}>Shop</Link>
-            <Link href={""}>Contact Us</Link>
+            <Link href={"/About"}>About</Link>
+            <Link href={"/Shop"}>Shop</Link>
+            <Link href={"/Contact"}>Contact Us</Link>
           </Stack>
 
           {/* Categories */}
@@ -91,20 +91,20 @@ export default function Footer() {
             >
               Categories
             </h6>
-            <Link href={"/shop?category=Flower%20Pots#product"}>
+            <Link href={"/Shop?category=Flower%20Pots#product"}>
               Flowerpots
             </Link>
-            <Link href={"/shop?category=Ground%20Chakkars#product"}>
+            <Link href={"/Shop?category=Ground%20Chakkars#product"}>
               Ground Chakkar
             </Link>
-            <Link href={"/shop?category=One%20Sound#product"}>One Sound</Link>
-            <Link href={"/shop?category=Special%27s#product"}>Special’s</Link>
-            <Link href={"/shop?category=Rockets#product"}>Rocket</Link>
-            <Link href={"/shop?category=Repeating%20shots#product"}>
+            <Link href={"/Shop?category=One%20Sound#product"}>One Sound</Link>
+            <Link href={"/Shop?category=Special%27s#product"}>Special’s</Link>
+            <Link href={"/Shop?category=Rockets#product"}>Rocket</Link>
+            <Link href={"/Shop?category=Repeating%20shots#product"}>
               Aerials
             </Link>
-            <Link href={"/shop?category=Atom%20bombs#product"}>Bombs</Link>
-            <Link href={"/shop?category=Twinklers#product"}>Twinklers</Link>
+            <Link href={"/Shop?category=Atom%20bombs#product"}>Bombs</Link>
+            <Link href={"/Shop?category=Twinklers#product"}>Twinklers</Link>
           </Stack>
 
           {/* Certifications */}
