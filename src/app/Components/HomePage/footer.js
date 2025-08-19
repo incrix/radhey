@@ -1,5 +1,6 @@
 "use client";
 import Stack from "@mui/material/Stack";
+import Image from "next/image"; // ✅ import Next.js Image
 import logo from "@/public/Images/radheyLogo.svg";
 import green from "@/public/Images/green.png";
 import iso from "@/public/Images/iso.png";
@@ -20,23 +21,24 @@ export default function Footer() {
         width={"100%"}
         gap={2}
         sx={{
-          maxWidth: "1480px", // optional max width instead of px trick
+          maxWidth: "1480px",
           margin: "0 auto",
         }}
       >
         <Stack
           direction={"row"}
           justifyContent={"space-between"}
-          flexWrap={{ xs: "wrap", lg: "nowrap" }} // replaces width < 1024 check
+          flexWrap={{ xs: "wrap", lg: "nowrap" }}
         >
           {/* Logo + About */}
           <Stack maxWidth={"300px"} gap={2}>
             <Stack direction="row" gap={1} alignItems="center">
-              <img
-                src={logo.src}
-                style={{
-                  width: "80px",
-                }}
+              <Image
+                src={logo}
+                alt="Radhey Fireworks Logo" // ✅ alt text added
+                width={80}
+                height={80}
+                priority
               />
               <Stack>
                 <span
@@ -118,20 +120,13 @@ export default function Footer() {
             >
               Certified
             </h6>
-            <img
-              style={{
-                width: "100px",
-              }}
-              src={green.src}
-              alt="Green"
+            <Image
+              src={green}
+              alt="Green Certification"
+              width={100}
+              height={100}
             />
-            <img
-              style={{
-                width: "100px",
-              }}
-              src={iso.src}
-              alt="ISO"
-            />
+            <Image src={iso} alt="ISO Certification" width={100} height={100} />
           </Stack>
         </Stack>
 
@@ -168,10 +163,11 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img
-                  style={{ width: "80px" }}
+                <Image
                   src="https://incrix.com/logo.png"
                   alt="Incrix Logo"
+                  width={80}
+                  height={30}
                 />
               </a>
             </p>
