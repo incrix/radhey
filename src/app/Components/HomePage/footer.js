@@ -48,7 +48,7 @@ export default function Footer() {
                     color: "#000",
                   }}
                 >
-                  Sankamithra
+                  Radhey Fireworks
                 </span>
                 <span
                   style={{

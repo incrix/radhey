@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import ProductCard from "@/src/app/Shop/Components/productCard";
 import { useRouter } from "next/navigation";
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
 export default function OurProducts() {
   const [productList, setProductList] = useState([]);
@@ -81,9 +82,10 @@ export default function OurProducts() {
           }}
         >
           <Button
+            endIcon={<KeyboardDoubleArrowRightIcon />}
             onClick={() => router.push("/Shop")}
             sx={{
-              width: "fit-content",
+              width: "180px",
               textTransform: "capitalize",
               borderRadius: "10px",
               fontSize: "16px",

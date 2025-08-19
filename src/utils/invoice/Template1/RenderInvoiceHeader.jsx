@@ -21,7 +21,7 @@ export default function RenderInvoiceHeader() {
             textTransform: "uppercase",
           }}
         >
-          Sankamithra Fireworks
+          Radhey Fireworks
         </Text>
         <Text
           style={{
@@ -47,7 +47,7 @@ export default function RenderInvoiceHeader() {
               maxWidth: 200,
             }}
           >
-            Email: sankamithrathunderworld@gmail.com
+            Email: radheyfireworks@gmail.com
           </Text>
         </View>
         <Text
@@ -56,7 +56,7 @@ export default function RenderInvoiceHeader() {
             maxWidth: 200,
           }}
         >
-          Website: www.sankamithra.com/
+          Website: www.radhey.com/
         </Text>
       </View>
       <View
