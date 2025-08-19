@@ -7,10 +7,11 @@ import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { ShoppingCart } from "@mui/icons-material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
+import Image from "next/image";
 
 export default function ProductCard({ product }) {
   const [count, setCount] = useState(1);
@@ -63,7 +64,7 @@ export default function ProductCard({ product }) {
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
   }, []);
 
-  const isProductAdded = () => {
+  const isProductAdded = useCallback(() => {
     let item = cart.filter((item) => item.id == product.id)[0];
     if (item) {
       setIsAdded(true);
@@ -73,11 +74,11 @@ export default function ProductCard({ product }) {
       setIsAdded(false);
       setCount(1);
     }
-  };
+  }, [cart, product.id]); // Dependencies for useCallback
 
   useEffect(() => {
     isProductAdded();
-  }, [cart]);
+  }, [cart, isProductAdded]);
 
   return (
     <Paper
@@ -138,21 +139,23 @@ export default function ProductCard({ product }) {
           </div>
         )}
         <Stack>
-          <img
-            onClick={() => {
-              pathArray.length > 2
-                ? router.push(`product?id=${product.id}`)
-                : router.push(`Shop/product?id=${product.id}`);
-            }}
+          <Image
             src={`https://e-com.incrix.com/Sankamithra%20Products/${product.image[0]}`}
-            alt="pr"
+            alt={product.name || "Product image"} // Use a descriptive alt text
+            width={100} // Set explicit width (adjust based on your design)
+            height={100} // Set explicit height (adjust based on your design)
             style={{
-              width: "100%",
-              height: "100%",
               objectFit: "cover",
               objectPosition: "center",
               borderRadius: "10px",
               cursor: "pointer",
+              width: "100%",
+              height: "100%",
+            }}
+            onClick={() => {
+              pathArray.length > 2
+                ? router.push(`product?id=${product.id}`)
+                : router.push(`Shop/product?id=${product.id}`);
             }}
           />
         </Stack>

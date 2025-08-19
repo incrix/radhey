@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 export default function ProductTab({ category }) {
   const [productList, setProductList] = useState([]);
   const [filteredProductList, setFilteredProductList] = useState([]);
+
+  // 🔹 1. Fetch data only once
   useEffect(() => {
     fetch("https://e-com.incrix.com/Sankamithra%20Products/productData.json")
       .then((response) => response.json())
@@ -14,6 +16,10 @@ export default function ProductTab({ category }) {
         localStorage.setItem("productList", JSON.stringify(data));
         setProductList(data);
       });
+  }, []); // ✅ only runs once
+
+  // 🔹 2. Filter when category OR productList changes
+  useEffect(() => {
     if (category) {
       setFilteredProductList(
         productList.filter((product) =>
@@ -29,7 +35,7 @@ export default function ProductTab({ category }) {
     } else {
       setFilteredProductList(productList);
     }
-  }, [productList.length, category]);
+  }, [category, productList]); // ✅ correct dependencies
 
   return (
     <Stack
@@ -68,10 +74,10 @@ export default function ProductTab({ category }) {
           lg: "center",
         }}
       >
-        {filteredProductList.length != 0 &&
-          filteredProductList.map((product, index) => {
-            return <ProductCard key={index} product={product} />;
-          })}
+        {filteredProductList.length > 0 &&
+          filteredProductList.map((product, index) => (
+            <ProductCard key={index} product={product} />
+          ))}
       </Stack>
     </Stack>
   );
