@@ -243,7 +243,7 @@ export default function ProductPage() {
                       <Typography
                         className={quicksand.className}
                         variant={"h6"}
-                        backgroundColor={"var(--primary)"}
+                        backgroundColor={"var(--secondary)"}
                         color={"white"}
                         width={50}
                         textAlign={"center"}

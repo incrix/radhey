@@ -170,9 +170,9 @@ export default function CartPage() {
                                 backgroundColor: "var(--secondary)",
                               },
                             }}
-                            onClick={() => handleIncrement(index)}
+                            onClick={() => handleDecrement(index)}
                           >
-                            +
+                            -
                           </IconButton>
                           <Typography
                             sx={{
@@ -200,9 +200,9 @@ export default function CartPage() {
                                 backgroundColor: "var(--secondary)",
                               },
                             }}
-                            onClick={() => handleDecrement(index)}
+                            onClick={() => handleIncrement(index)}
                           >
-                            -
+                            +
                           </IconButton>
                         </Stack>
                       </StyledTableCell>
