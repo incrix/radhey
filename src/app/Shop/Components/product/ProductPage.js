@@ -223,7 +223,7 @@ export default function ProductPage() {
                   <Stack direction={"row"} gap={2}>
                     <ButtonGroup>
                       <Button
-                        disableElevation
+                        // disableElevation
                         variant={"contained"}
                         color={"primary"}
                         sx={{
@@ -242,9 +242,9 @@ export default function ProductPage() {
                       </Button>
                       <Typography
                         className={quicksand.className}
-                        variant={"h6"}
-                        backgroundColor={"var(--secondary)"}
-                        color={"white"}
+                        // variant={"h5"}
+                        // backgroundColor={"var(--secondary)"}
+                        color={"var(--secondary)"}
                         width={50}
                         textAlign={"center"}
                         display={"flex"}
@@ -252,11 +252,14 @@ export default function ProductPage() {
                         alignItems={"center"}
                         fontWeight={600}
                         fontSize={"20px"}
+                        sx={{
+                          fontSize: { xs: "12px", md: "20px" },
+                        }}
                       >
                         {itemCount}
                       </Typography>
                       <Button
-                        disableElevation
+                        // disableElevation
                         variant={"contained"}
                         sx={{
                           fontWeight: "bold",
