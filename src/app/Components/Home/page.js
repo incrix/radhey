@@ -14,6 +14,17 @@ import { useRouter } from "next/navigation";
 
 export default function MyHome() {
   const router = useRouter();
+
+  const handlePdfDownload = () => {
+    const link = document.createElement("a");
+    link.href = "https://e-com.incrix.com/Radhey%20Products/pdf";
+    link.download = "Radhey.pdf"; // optional file name
+    link.target = "_blank"; // open in new tab if not downloadable
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <Stack position="relative" minHeight="100vh">
       <NavBar />
@@ -36,6 +47,7 @@ export default function MyHome() {
         {/* PDF Button */}
         <Fab
           aria-label="pdf"
+          onClick={handlePdfDownload}
           sx={{
             boxShadow: 3,
             backgroundColor: "var(--secondary)",
@@ -52,6 +64,7 @@ export default function MyHome() {
         {/* Cart Button */}
         <Fab
           aria-label="cart"
+          onClick={() => router.push("/Cart")}
           sx={{
             boxShadow: 3,
             backgroundColor: "var(--primary)",
@@ -62,7 +75,7 @@ export default function MyHome() {
             },
           }}
         >
-          <ShoppingCartIcon onClick={() => router.push("/Cart")} />
+          <ShoppingCartIcon />
         </Fab>
       </Stack>
     </Stack>
