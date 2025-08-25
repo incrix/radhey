@@ -9,8 +9,10 @@ import SubdirectoryArrowRightIcon from "@mui/icons-material/SubdirectoryArrowRig
 
 import RetailBoxes from "@/public/Images/retailBoxes.png";
 import WholeSale from "@/public/Images/wholeSale.png";
+import { useRouter } from "next/navigation";
 
 export default function Offer() {
+  const router = useRouter();
   return (
     <Stack
       sx={{
@@ -140,9 +142,10 @@ export default function Offer() {
             <Button
               disableElevation
               variant="contained"
+              onClick={() => router.push("/Shop")}
               sx={{
                 mt: { xs: 5, md: "auto" },
-                backgroundColor: "orange",
+                backgroundColor: "var(--secondary)",
                 borderRadius: "20px",
                 textTransform: "none",
                 fontSize: { xs: "16px", md: "18px" },
@@ -210,9 +213,10 @@ export default function Offer() {
             <Button
               disableElevation
               variant="contained"
+              onClick={() => router.push("/Contact")}
               sx={{
                 mt: { xs: 5, md: "auto" },
-                backgroundColor: "orange",
+                backgroundColor: "var(--secondary)",
                 borderRadius: "20px",
                 textTransform: "none",
                 fontSize: { xs: "16px", md: "18px" },
@@ -273,9 +277,10 @@ export default function Offer() {
             <Button
               disableElevation
               variant="contained"
+              onClick={() => router.push("/Contact")}
               sx={{
                 mt: { xs: 5, md: "auto" },
-                backgroundColor: "orange",
+                backgroundColor: "var(--secondary)",
                 borderRadius: "20px",
                 textTransform: "none",
                 fontSize: { xs: "16px", md: "18px" },

@@ -6,8 +6,10 @@ import Image from "next/image";
 import SparkOne from "@/public/Images/sparkOne.png";
 import SparkTwo from "@/public/Images/sparkTwo.png";
 import CircleIcon from "@mui/icons-material/Circle";
+import { useRouter } from "next/navigation";
 
 export default function MyProcess() {
+  const router = useRouter();
   return (
     <Stack mt={{ xs: 5, md: 10 }}>
       <Stack
@@ -61,6 +63,7 @@ export default function MyProcess() {
           <Button
             disableElevation
             variant="contained"
+            onClick={() => router.push("/Shop")}
             sx={{
               width: "fit-content",
               borderRadius: "12px",
