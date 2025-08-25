@@ -5,6 +5,7 @@ import logo from "@/public/Images/radheyLogo.svg";
 import green from "@/public/Images/green.png";
 import iso from "@/public/Images/iso.png";
 import Link from "next/link";
+import { Typography } from "@mui/material";
 
 export default function Footer() {
   return (
@@ -67,15 +68,15 @@ export default function Footer() {
 
           {/* Company Links */}
           <Stack gap={2} mt={{xs: 2, md: 0}}>
-            <h6
-              style={{
+            <Typography
+              sx={{
                 color: "var(--text-color)",
-                fontSize: "24px",
-                fontWeight: "800",
+                fontSize: { xs: "18px", md: "24px" },
+                fontWeight: "600",
               }}
             >
               Company
-            </h6>
+            </Typography>
             <Link href={"/"}>Home</Link>
             <Link href={"/About"}>About</Link>
             <Link href={"/Shop"}>Shop</Link>
@@ -84,15 +85,15 @@ export default function Footer() {
 
           {/* Categories */}
           <Stack gap={2} mt={{xs: 2, md: 0}} >
-            <h6
-              style={{
+            <Typography
+              sx={{
                 color: "var(--text-color)",
-                fontSize: "24px",
-                fontWeight: "800",
+                fontSize: { xs: "18px", md: "24px" },
+                fontWeight: "600",
               }}
             >
               Categories
-            </h6>
+            </Typography>
             <Link href={"/Shop?category=Flower%20Pots#product"}>
               Flowerpots
             </Link>
@@ -111,15 +112,15 @@ export default function Footer() {
 
           {/* Certifications */}
           <Stack gap={2} mt={{xs: 2, md: 0}}>
-            <h6
-              style={{
+            <Typography 
+              sx={{
                 color: "var(--text-color)",
-                fontSize: "24px",
-                fontWeight: "800",
+                fontSize: { xs: "18px", md: "24px" },
+                fontWeight: "600",
               }}
             >
               Certified
-            </h6>
+            </Typography>
             <Image
               src={green}
               alt="Green Certification"
