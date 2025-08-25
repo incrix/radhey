@@ -179,6 +179,8 @@ const CatCard = ({ title, imgURL, url, isSelected }) => {
         alignItems: "center",
         gap: "10px",
         cursor: "pointer",
+        backgroundColor: "var(--primary)",
+        color: "white",
       }}
       onClick={() => {
         !url
