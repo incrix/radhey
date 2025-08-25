@@ -284,6 +284,7 @@ export default function CartPage() {
                 </Stack>
                 <Stack gap={2}>
                   <Button
+                    disableElevation
                     variant="contained"
                     sx={{
                       backgroundColor: "var(--primary)",
@@ -306,6 +307,7 @@ export default function CartPage() {
                     </Link>
                   </Button>
                   <Button
+                    disableElevation
                     variant="outlined"
                     sx={{
                       border: "1px solid var(--primary)",

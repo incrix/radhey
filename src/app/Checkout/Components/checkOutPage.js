@@ -601,6 +601,7 @@ function BillingDetails({
       </Stack>
       <Stack>
         <Button
+        disableElevation
           variant="contained"
           sx={{
             backgroundColor: "var(--primary)",
