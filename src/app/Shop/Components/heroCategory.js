@@ -25,11 +25,13 @@ const CatButton = ({ title, img, count, link }) => {
         borderRadius: "5px",
         height: "50px",
         padding: "0 20px",
-        color: "var(--primary)",
+        color: "white",
+        backgroundColor: "var(--primary)",
         "&:hover": {
-          backgroundColor: "var(--category-color)",
-          borderColor: "var(--secondary)",
+          backgroundColor: "var(--primary)",
+          // borderColor: "var(--secondary)",
           cursor: "pointer",
+          opacity: 0.9,
         },
       }}
       onClick={() => {
