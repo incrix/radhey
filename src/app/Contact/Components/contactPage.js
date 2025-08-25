@@ -45,6 +45,12 @@ export default function ContactPage() {
 }
 
 function AddressComponent() {
+  const handlePhoneCallOne = () => {
+    window.location.href = "tel: 9360221102";
+  };
+  const handlePhoneCallTwo = () => {
+    window.location.href = "tel: 9361592454";
+  };
   return (
     <Stack
       direction={{
@@ -91,20 +97,30 @@ function AddressComponent() {
               fontSize={20}
               fontWeight={400}
             >
-              3/1427/G6, <br /> Opposite PRC Bus Depot, <br />
-              Sattur Road, <br />
-              Sivakasi - 626123.
+              No. 2/553/V3, <br />
+              Sri Ram Nagar, 
+              Sivakasi, <br />
+              Main Road, 
+              Mettamalai -626203. <br />
+              Virudhunagar District, Tamil Nadu, India.
             </Typography>
             <Typography
               className={quicksand.className}
               fontSize={20}
               fontWeight={400}
             >
-              Ph: +91 99446 95228 <br />
-              &nbsp;&ensp;&emsp;+91 75488 20326
+              Email: <span style={{cursor: "pointer"}}>radheythunders@gmail.com</span>
+            </Typography>
+            <Typography
+              className={quicksand.className}
+              fontSize={20}
+              fontWeight={400}
+            >
+              Ph: <span style={{cursor: "pointer"}} onClick={handlePhoneCallOne}>+91 93602 21102</span> <br />
+              &nbsp;&ensp;&emsp;<span style={{cursor: "pointer"}} onClick={handlePhoneCallTwo}>+91 93615 92454</span>
             </Typography>
           </Stack>
-          <Stack gap={2}>
+          {/* <Stack gap={2}>
             <Typography
               className={quicksand.className}
               variant="h2"
@@ -131,7 +147,7 @@ function AddressComponent() {
               Ph: +91 99620 66648 <br />
               &nbsp;&ensp;&emsp;+91 84892 92901
             </Typography>
-          </Stack>
+          </Stack> */}
         </Stack>
         <Stack gap={2}>
           <CallButton />

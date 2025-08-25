@@ -273,6 +273,7 @@ export default function ProductCard({ product }) {
             gap={1}
           >
             <Button
+              disableElevation
               variant="contained"
               sx={{
                 color: "white",
@@ -312,6 +313,7 @@ export default function ProductCard({ product }) {
             </Button>
             <Stack direction={"row"}>
               <Button
+                // disableElevation
                 variant="contained"
                 fullWidth={false}
                 sx={{
@@ -338,7 +340,7 @@ export default function ProductCard({ product }) {
                 width={"100%"}
                 justifyContent={"center"}
                 sx={{
-                  backgroundColor: "var(--primary)",
+                  backgroundColor: "var(--secondary)",
                   minWidth: "30px",
                   textAlign: "center",
                   fontSize: "14px",
@@ -350,6 +352,7 @@ export default function ProductCard({ product }) {
                 {count}
               </Stack>
               <Button
+                // disableElevation
                 variant="contained"
                 fullWidth={false}
                 sx={{
