@@ -66,7 +66,7 @@ export default function Footer() {
           </Stack>
 
           {/* Company Links */}
-          <Stack gap={2}>
+          <Stack gap={2} mt={{xs: 2, md: 0}}>
             <h6
               style={{
                 color: "var(--text-color)",
@@ -83,7 +83,7 @@ export default function Footer() {
           </Stack>
 
           {/* Categories */}
-          <Stack gap={2}>
+          <Stack gap={2} mt={{xs: 2, md: 0}} >
             <h6
               style={{
                 color: "var(--text-color)",
@@ -110,7 +110,7 @@ export default function Footer() {
           </Stack>
 
           {/* Certifications */}
-          <Stack gap={2}>
+          <Stack gap={2} mt={{xs: 2, md: 0}}>
             <h6
               style={{
                 color: "var(--text-color)",
