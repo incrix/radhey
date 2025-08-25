@@ -327,20 +327,20 @@ export default function ProductCard({ product }) {
                   fontSize: "14px",
                   fontWeight: "bold",
                   textTransform: "none",
-                  backgroundColor: "var(--secondary)",
+                  backgroundColor: "var(--primary)",
                   "&:hover": {
-                    backgroundColor: "var(--secondary)",
+                    backgroundColor: "var(--primary)",
                   },
                 }}
-                onClick={handleIncrement}
+                onClick={handleDecrement}
               >
-                <AddRoundedIcon />
+                <RemoveRoundedIcon />
               </Button>
               <Stack
                 width={"100%"}
                 justifyContent={"center"}
                 sx={{
-                  backgroundColor: "var(--secondary)",
+                  backgroundColor: "var(--primary)",
                   minWidth: "30px",
                   textAlign: "center",
                   fontSize: "14px",
@@ -366,14 +366,14 @@ export default function ProductCard({ product }) {
                   borderRadius: "0 5px 5px 0",
                   fontWeight: "bold",
                   textTransform: "none",
-                  backgroundColor: "var(--secondary)",
+                  backgroundColor: "var(--primary)",
                   "&:hover": {
-                    backgroundColor: "var(--secondary)",
+                    backgroundColor: "var(--primary)",
                   },
                 }}
-                onClick={handleDecrement}
+                onClick={handleIncrement}
               >
-                <RemoveRoundedIcon />
+                <AddRoundedIcon />
               </Button>
             </Stack>
           </Stack>
