@@ -340,12 +340,12 @@ export default function ProductCard({ product }) {
                 width={"100%"}
                 justifyContent={"center"}
                 sx={{
-                  backgroundColor: "var(--primary)",
+                  // backgroundColor: "var(--primary)",
                   minWidth: "30px",
                   textAlign: "center",
-                  fontSize: "14px",
+                  fontSize: { xs: "12px", md: "18px" },
                   fontWeight: "bold",
-                  color: "white",
+                  color: "var(--primary)",
                   width: { xs: "50px", md: "100%" },
                 }}
               >
