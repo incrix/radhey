@@ -15,7 +15,7 @@ export default function OurProducts() {
     fetch("https://e-com.incrix.com/Sankamithra%20Products/productData.json")
       .then((response) => response.json())
       .then((data) => {
-        data.sort((a, b) => a.sku - b.sku);
+        data.sort((a, b) => a.sort_id - b.sort_id);
 
         // Group by category
         const grouped = data.reduce((acc, product) => {
