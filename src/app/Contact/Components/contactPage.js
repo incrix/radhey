@@ -9,6 +9,7 @@ import ContactPng from "@/public/Images/contactImage.png";
 import { Quicksand } from "next/font/google";
 const quicksand = Quicksand({ subsets: ["latin"] });
 import Image from "next/image";
+import { useState } from "react";
 
 export default function ContactPage() {
   return (
@@ -186,6 +187,54 @@ function AddressComponent() {
 }
 
 function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (field) => (e) => {
+    setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+  };
+
+  // const handleSubmit = async () => {
+  //   if (!formData.name || !formData.email || !formData.message) {
+  //     alert("Please fill required fields");
+  //     return;
+  //   }
+
+  //   setLoading(true);
+  //   try {
+  //     const res = await fetch("https://sriramdiecastings.com/send-mail.php", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(formData),
+  //     });
+
+  //     const text = await res.text();
+
+  //     if (res.ok) {
+  //       alert("Message sent successfully!");
+  //       setFormData({
+  //         name: "",
+  //         email: "",
+  //         phone: "",
+  //         company: "",
+  //         message: "",
+  //       });
+  //     } else {
+  //       alert(`Error: ${text || "Failed to send"}`);
+  //     }
+  //   } catch (err) {
+  //     alert("Network error. Please try again later.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   return (
     <Stack
       direction={{
@@ -227,19 +276,47 @@ function ContactForm() {
         </Stack>
         <Stack gap={2}>
           <Stack direction={"row"} gap={2}>
-            <TextField type="text" fullWidth placeholder="Name" />
-            <TextField type="email" placeholder="Email" fullWidth />
+              <TextField
+              type="text"
+              fullWidth
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleChange("name")}
+            />
+            <TextField
+              type="email"
+              placeholder="Email"
+              fullWidth
+              value={formData.email}
+              onChange={handleChange("email")}
+            />
           </Stack>
           <Stack direction={"row"} gap={2}>
-            <TextField type="text" placeholder="Phone" fullWidth />
-            <TextField type="text" placeholder="Company" fullWidth />
+            <TextField
+              type="text"
+              placeholder="Phone"
+              fullWidth
+              value={formData.phone}
+              onChange={handleChange("phone")}
+            />
+            <TextField
+              type="text"
+              placeholder="Company"
+              fullWidth
+              value={formData.company}
+              onChange={handleChange("company")}
+            />
           </Stack>
           <TextField
             placeholder="Message"
             multiline
             inputProps={{ style: { resize: "vertical" } }}
+            value={formData.message}
+            onChange={handleChange("message")}
           />
           <Button
+            // disabled={loading}
+            // onClick={handleSubmit}
             variant="contained"
             sx={{
               backgroundColor: "var(--primary)",
