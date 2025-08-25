@@ -20,6 +20,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -38,5 +39,16 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+::selection {
+  background-color: var(--secondary);
+  color: #fff;
+}
+
+/* For Firefox */
+::-moz-selection {
+  background-color: var(--secondary);
+  color: #fff;
 }
 
