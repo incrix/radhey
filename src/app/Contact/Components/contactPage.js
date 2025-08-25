@@ -25,7 +25,7 @@ export default function ContactPage() {
           flexDirection: "column",
           alignItems: "center",
           width: "100%",
-          padding: { xs: '0px 10px', md: "0px 40px" },
+          padding: { xs: "0px 10px", md: "0px 40px" },
         }}
       >
         <Stack
@@ -98,10 +98,8 @@ function AddressComponent() {
               fontWeight={400}
             >
               No. 2/553/V3, <br />
-              Sri Ram Nagar, 
-              Sivakasi, <br />
-              Main Road, 
-              Mettamalai -626203. <br />
+              Sri Ram Nagar, Sivakasi, <br />
+              Main Road, Mettamalai -626203. <br />
               Virudhunagar District, Tamil Nadu, India.
             </Typography>
             <Typography
@@ -109,15 +107,25 @@ function AddressComponent() {
               fontSize={20}
               fontWeight={400}
             >
-              Email: <span style={{cursor: "pointer"}}>radheythunders@gmail.com</span>
+              Email:{" "}
+              <span style={{ cursor: "pointer" }}>
+                radheythunders@gmail.com
+              </span>
             </Typography>
             <Typography
               className={quicksand.className}
               fontSize={20}
               fontWeight={400}
             >
-              Ph: <span style={{cursor: "pointer"}} onClick={handlePhoneCallOne}>+91 93602 21102</span> <br />
-              &nbsp;&ensp;&emsp;<span style={{cursor: "pointer"}} onClick={handlePhoneCallTwo}>+91 93615 92454</span>
+              Ph:{" "}
+              <span style={{ cursor: "pointer" }} onClick={handlePhoneCallOne}>
+                +91 93602 21102
+              </span>{" "}
+              <br />
+              &nbsp;&ensp;&emsp;
+              <span style={{ cursor: "pointer" }} onClick={handlePhoneCallTwo}>
+                +91 93615 92454
+              </span>
             </Typography>
           </Stack>
           {/* <Stack gap={2}>
@@ -253,7 +261,7 @@ function ContactForm() {
           md: "40%",
         }}
       >
-         <Image
+        <Image
           src={ContactPng}
           alt="Contact illustration" // meaningful alt text
           style={{ width: "100%", height: "auto" }}
