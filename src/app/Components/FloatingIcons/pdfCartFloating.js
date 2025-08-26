@@ -10,8 +10,8 @@ export default function PdfCartFloating() {
 
   const handlePdfDownload = () => {
     const link = document.createElement("a");
-    link.href = "https://e-com.incrix.com/Radhey%20Products/pdf";
-    link.download = "Radhey.pdf";
+    link.href = "https://e-com.incrix.com/Radhey/RadheyThunders(2025%20Pricelist).pdf";
+    link.download = "RadheyThunders(2025%20Pricelist).pdf";
     link.target = "_blank";
     document.body.appendChild(link);
     link.click();
