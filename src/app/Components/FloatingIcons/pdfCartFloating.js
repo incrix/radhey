@@ -24,7 +24,7 @@ export default function PdfCartFloating() {
       sx={{
         position: "fixed",
         bottom: 16,
-        right: 16,
+        right: { xs: 18, md: 16 },
         zIndex: 1000,
       }}
     >
