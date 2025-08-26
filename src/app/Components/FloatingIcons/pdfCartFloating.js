@@ -8,14 +8,43 @@ import { useRouter } from "next/navigation";
 export default function PdfCartFloating() {
   const router = useRouter();
 
-  const handlePdfDownload = () => {
-    const link = document.createElement("a");
-    link.href = "https://e-com.incrix.com/Radhey/RadheyThunders(2025%20Pricelist).pdf";
-    link.download = "RadheyThunders(2025%20Pricelist).pdf";
-    link.target = "_blank";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handlePdfDownload = async () => {
+    const pdfUrl = "https://e-com.incrix.com/Radhey/RadheyThunders(2025%20Pricelist).pdf";
+    const fileName = "RadheyThunders_2025_Pricelist.pdf";
+
+    try {
+      // Open PDF in a new tab
+      window.open(pdfUrl, "_blank");
+
+      // Fetch the PDF to trigger download
+      const response = await fetch(pdfUrl, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/pdf",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch the PDF");
+      }
+
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      // Trigger download
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Clean up the blob URL
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Error downloading PDF:", error);
+      alert("Failed to download the PDF. Please try downloading it manually from the opened tab.");
+    }
   };
 
   // 🔥 Glow + Floating style
@@ -26,7 +55,7 @@ export default function PdfCartFloating() {
     overflow: "hidden",
     backgroundColor: bgColor,
     transition: "opacity 0.3s ease",
-    animation: `float 2.5s ease-in-out infinite ${delay}`, // 👈 floating effect
+    animation: `float 2.5s ease-in-out infinite ${delay}`,
     "&::before": {
       content: '""',
       position: "absolute",
