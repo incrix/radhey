@@ -18,6 +18,37 @@ export default function PdfCartFloating() {
     document.body.removeChild(link);
   };
 
+  // 🔥 Reusable single-color glow style
+  const borderBeamStyle = (glowColor, bgColor) => ({
+    boxShadow: `0 0 8px ${glowColor}, 0 0 16px ${glowColor}`,
+    color: "white",
+    position: "relative",
+    overflow: "hidden",
+    backgroundColor: bgColor, // ✅ always use custom bg
+    transition: "opacity 0.3s ease",
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      inset: -2,
+      borderRadius: "50%",
+      padding: "2px",
+      background: `conic-gradient(from 0deg, ${glowColor} 0%, transparent 80%)`,
+      WebkitMask:
+        "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+      WebkitMaskComposite: "xor",
+      maskComposite: "exclude",
+      animation: "rotate 2s linear infinite",
+    },
+    "&:hover": {
+      opacity: 0.9,
+      backgroundColor: bgColor, // ✅ stop MUI from switching to grey
+    },
+    "@keyframes rotate": {
+      "0%": { transform: "rotate(0deg)" },
+      "100%": { transform: "rotate(360deg)" },
+    },
+  });
+
   return (
     <Stack
       spacing={2}
@@ -28,45 +59,19 @@ export default function PdfCartFloating() {
         zIndex: 1000,
       }}
     >
+      {/* PDF Button */}
       <Fab
         aria-label="pdf"
         onClick={handlePdfDownload}
-        sx={{
-          boxShadow: 3,
-          backgroundColor: "var(--secondary)",
-          color: "white",
-          "&:hover": {
-            backgroundColor: "var(--secondary)",
-            opacity: 0.9,
-          },
-          animation: 'float 2s ease-in-out infinite',
-          '@keyframes float': {
-            '0%': { transform: 'translateY(0)' },
-            '50%': { transform: 'translateY(-8px)' },
-            '100%': { transform: 'translateY(0)' },
-          },
-        }}
+        sx={borderBeamStyle("#ff4d4d", "var(--secondary)")} // 🔴 red glow
       >
         <PictureAsPdfIcon />
       </Fab>
+
       <Fab
         aria-label="cart"
         onClick={() => router.push("/Cart")}
-        sx={{
-          boxShadow: 3,
-          backgroundColor: "var(--primary)",
-          color: "white",
-          "&:hover": {
-            backgroundColor: "var(--primary)",
-            opacity: 0.9,
-          },
-          animation: 'float 2s ease-in-out infinite 0.2s',
-          '@keyframes float': {
-            '0%': { transform: 'translateY(0)' },
-            '50%': { transform: 'translateY(-8px)' },
-            '100%': { transform: 'translateY(0)' },
-          },
-        }}
+        sx={borderBeamStyle("#4dd2ff", "var(--primary)")} // 🔵 blue glow
       >
         <ShoppingCartIcon />
       </Fab>
