@@ -1,6 +1,6 @@
 "use client";
 import Fab from "@mui/material/Fab";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { GiFireworkRocket } from "react-icons/gi";
 
 export default function FloatingTopButton() {
   const scrollToTop = () => {
@@ -55,7 +55,7 @@ export default function FloatingTopButton() {
         zIndex: 1000,
       }}
     >
-      <KeyboardArrowUpIcon  sx={{fontSize: "2.5rem"}} />
+      <GiFireworkRocket style={{ fontSize: "2rem" }} />
     </Fab>
   );
 }
