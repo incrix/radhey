@@ -67,13 +67,13 @@ export default function HeroCarousel() {
           padding-top: 50%;
         }
 
-        /* Mobile override: fixed 550px height */
-        @media (max-width: 600px) {
-          .carousel-item {
-            padding-top: 0;
-            height: 550px;
-          }
-        }
+        // /* Mobile override: fixed 550px height */
+        // @media (max-width: 600px) {
+        //   .carousel-item {
+        //     padding-top: 0;
+        //     height: 550px;
+        //   }
+        // }
 
         .slick-slide > div {
           display: flex;
