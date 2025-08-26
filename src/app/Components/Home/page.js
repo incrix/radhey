@@ -56,9 +56,9 @@ export default function MyHome() {
       <AnimatedSection animationType="zoomIn" delay={0.1}>
         <HeroCarousel />
       </AnimatedSection>
-      <AnimatedSection animationType="slideInLeft" delay={0.2}>
+      {/* <AnimatedSection animationType="slideInLeft" delay={0.2}> */}
         <OurProducts />
-      </AnimatedSection>
+      {/* </AnimatedSection> */}
       <AnimatedSection animationType="fadeUp" delay={0.3}>
         <AboutUs />
       </AnimatedSection>
