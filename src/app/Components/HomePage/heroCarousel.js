@@ -6,7 +6,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import Carousel1 from "@/public/Images/heroOne.jpg";
+import Carousel1 from "@/public/Images/heroOne.svg";
 import Carousel2 from "@/public/Images/heroTwo.jpg";
 
 export default function HeroCarousel() {
@@ -18,7 +18,7 @@ export default function HeroCarousel() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    arrows: false, // remove arrows if you want only dots
+    arrows: false,
   };
 
   return (
@@ -33,39 +33,52 @@ export default function HeroCarousel() {
         width="100%"
         sx={{
           borderRadius: "20px",
-          overflow: "hidden", // ensures images respect border-radius
+          overflow: "hidden",
           position: "relative",
         }}
       >
         <Slider {...settings}>
-          <div>
+          <div className="carousel-item">
             <Image
               src={Carousel1}
               alt="Hero Image 1"
-              style={{
-                width: "100%",
-                height: "550px",
-                objectFit: "cover",
-              }}
+              fill
+              style={{ objectFit: "cover" }}
               priority
             />
           </div>
-          <div>
+
+          <div className="carousel-item">
             <Image
               src={Carousel2}
               alt="Hero Image 2"
-              style={{
-                width: "100%",
-                height: "550px",
-                objectFit: "cover",
-              }}
+              fill
+              style={{ objectFit: "cover" }}
             />
           </div>
         </Slider>
       </Stack>
 
       <style jsx global>{`
-        /* Move dots inside and style them */
+        /* Default: 2:1 ratio */
+        .carousel-item {
+          position: relative;
+          width: 100%;
+          padding-top: 50%;
+        }
+
+        /* Mobile override: fixed 550px height */
+        @media (max-width: 600px) {
+          .carousel-item {
+            padding-top: 0;
+            height: 550px;
+          }
+        }
+
+        .slick-slide > div {
+          display: flex;
+        }
+
         .slick-dots {
           position: absolute;
           bottom: 15px;

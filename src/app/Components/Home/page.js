@@ -53,9 +53,9 @@ export default function MyHome() {
   return (
     <Stack position="relative" minHeight="100vh">
       <NavBar />
-      <AnimatedSection animationType="zoomIn" delay={0.1}>
+      {/* <AnimatedSection animationType="zoomIn" delay={0.1}> */}
         <HeroCarousel />
-      </AnimatedSection>
+      {/* </AnimatedSection> */}
       {/* <AnimatedSection animationType="slideInLeft" delay={0.2}> */}
         <OurProducts />
       {/* </AnimatedSection> */}
