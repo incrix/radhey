@@ -6,12 +6,34 @@ import green from "@/public/Images/green.png";
 import iso from "@/public/Images/iso.png";
 import Link from "next/link";
 import { Typography } from "@mui/material";
+import PhoneIcon from "@mui/icons-material/Phone";
+import PersonIcon from "@mui/icons-material/Person";
+import MailIcon from "@mui/icons-material/Mail";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const handlePhoneCallOne = () => {
+    window.location.href = "tel: 9360221102";
+  };
+  const handlePhoneCallTwo = () => {
+    window.location.href = "tel: 9361592454";
+  };
+
+
+  const links = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/About" },
+    { label: "Shop", href: "/Shop" },
+    { label: "Contact Us", href: "/Contact" },
+  ];
   return (
     <Stack
       p={{ xs: 2, md: 4 }}
       px={{ xs: 2, md: 6 }}
+      mt={{ xs: 5, md: 0 }}
       sx={{
         width: "100%",
         display: "flex",
@@ -64,27 +86,79 @@ export default function Footer() {
             </Stack>
 
             <p>High quality fireworks manufacturer in TamilNadu</p>
+            <Stack direction="row" gap={1} alignItems="center">
+              <PersonIcon sx={{ color: "var(--secondary)" }} />
+              <p>Govindaraj K</p>
+            </Stack>
+            <Stack direction="row" gap={1} alignItems="center">
+              <MailIcon sx={{ color: "var(--secondary)" }} />
+              <a
+                href="mailto:radheythunders@gmail.com"
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  cursor: "pointer",
+                }}
+              >
+                radheythunders@gmail.com
+              </a>
+            </Stack>
+
+            <Stack direction="row" gap={1} alignItems="center">
+              <PhoneIcon sx={{ color: "var(--secondary)" }} />
+              <p onClick={handlePhoneCallOne} style={{ cursor: "pointer" }}>
+                +91 93602 21102
+              </p>
+              <span>|</span>
+              <p onClick={handlePhoneCallTwo} style={{ cursor: "pointer" }}>
+                +91 93615 92454
+              </p>
+            </Stack>
           </Stack>
 
           {/* Company Links */}
-          <Stack gap={2} mt={{xs: 2, md: 0}}>
-            <Typography
-              sx={{
-                color: "var(--text-color)",
-                fontSize: { xs: "18px", md: "24px" },
-                fontWeight: "600",
-              }}
-            >
-              Company
-            </Typography>
-            <Link href={"/"}>Home</Link>
-            <Link href={"/About"}>About</Link>
-            <Link href={"/Shop"}>Shop</Link>
-            <Link href={"/Contact"}>Contact Us</Link>
-          </Stack>
+          <Stack gap={2} mt={{ xs: 6, md: 0 }}>
+      <Typography
+        sx={{
+          color: "var(--text-color)",
+          fontSize: { xs: "18px", md: "24px" },
+          fontWeight: "600",
+        }}
+      >
+        Company
+      </Typography>
+
+      {links.map((link) => {
+        const isActive = pathname === link.href;
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            style={{
+              color: isActive ? "var(--primary)" : "var(--text-color)",
+              textDecoration: isActive ? "underline" : "none",
+              fontWeight: isActive ? "600" : "400",
+              transition: "all 0.2s ease-in-out",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "var(--primary)";
+              e.currentTarget.style.textDecoration = "underline";
+            }}
+            onMouseLeave={(e) => {
+              if (!isActive) {
+                e.currentTarget.style.color = "var(--text-color)";
+                e.currentTarget.style.textDecoration = "none";
+              }
+            }}
+          >
+            {link.label}
+          </Link>
+        );
+      })}
+    </Stack>
 
           {/* Categories */}
-          <Stack gap={2} mt={{xs: 2, md: 0}} >
+          <Stack gap={2} mt={{ xs: 6, md: 0 }}>
             <Typography
               sx={{
                 color: "var(--text-color)",
@@ -111,8 +185,8 @@ export default function Footer() {
           </Stack>
 
           {/* Certifications */}
-          <Stack gap={2} mt={{xs: 2, md: 0}}>
-            <Typography 
+          <Stack gap={2} mt={{ xs: 6, md: 0 }}>
+            <Typography
               sx={{
                 color: "var(--text-color)",
                 fontSize: { xs: "18px", md: "24px" },
@@ -144,10 +218,12 @@ export default function Footer() {
           <p style={{ margin: 0 }}>
             © {new Date().getFullYear()},{" "}
             <span
+              onClick={() => router.push("/")}
               style={{
                 color: "var(--primary)",
                 fontWeight: "600",
                 display: "inline",
+                cursor: "pointer",
               }}
             >
               Radhey Fireworks
