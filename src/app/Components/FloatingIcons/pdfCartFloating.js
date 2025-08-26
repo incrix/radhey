@@ -18,14 +18,15 @@ export default function PdfCartFloating() {
     document.body.removeChild(link);
   };
 
-  // 🔥 Reusable single-color glow style
-  const borderBeamStyle = (glowColor, bgColor) => ({
+  // 🔥 Glow + Floating style
+  const borderBeamStyle = (glowColor, bgColor, delay = "0s") => ({
     boxShadow: `0 0 8px ${glowColor}, 0 0 16px ${glowColor}`,
     color: "white",
     position: "relative",
     overflow: "hidden",
-    backgroundColor: bgColor, // ✅ always use custom bg
+    backgroundColor: bgColor,
     transition: "opacity 0.3s ease",
+    animation: `float 2.5s ease-in-out infinite ${delay}`, // 👈 floating effect
     "&::before": {
       content: '""',
       position: "absolute",
@@ -41,11 +42,16 @@ export default function PdfCartFloating() {
     },
     "&:hover": {
       opacity: 0.9,
-      backgroundColor: bgColor, // ✅ stop MUI from switching to grey
+      backgroundColor: bgColor,
     },
     "@keyframes rotate": {
       "0%": { transform: "rotate(0deg)" },
       "100%": { transform: "rotate(360deg)" },
+    },
+    "@keyframes float": {
+      "0%": { transform: "translateY(0)" },
+      "50%": { transform: "translateY(-8px)" },
+      "100%": { transform: "translateY(0)" },
     },
   });
 
@@ -63,15 +69,16 @@ export default function PdfCartFloating() {
       <Fab
         aria-label="pdf"
         onClick={handlePdfDownload}
-        sx={borderBeamStyle("#ff4d4d", "var(--secondary)")} // 🔴 red glow
+        sx={borderBeamStyle("#ff4d4d", "var(--secondary)", "0s")} // 🔴 red glow
       >
         <PictureAsPdfIcon />
       </Fab>
 
+      {/* Cart Button */}
       <Fab
         aria-label="cart"
         onClick={() => router.push("/Cart")}
-        sx={borderBeamStyle("#4dd2ff", "var(--primary)")} // 🔵 blue glow
+        sx={borderBeamStyle("#4dd2ff", "var(--primary)", "0.3s")} // 🔵 blue glow, staggered float
       >
         <ShoppingCartIcon />
       </Fab>
