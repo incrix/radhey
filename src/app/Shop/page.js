@@ -9,6 +9,7 @@ import Footer from "@/src/app/Components/HomePage/footer";
 import PdfCartFloating from "@/src/app/Components/FloatingIcons/pdfCartFloating";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
+import FloatingTopButton from "@/src/app/Components/FloatingIcons/floatingTopButton";
 
 const AnimatedSection = ({ children, animationType = 'fadeUp', delay = 0 }) => {
   const { ref, inView } = useInView({
@@ -84,6 +85,7 @@ export default function Shop() {
         <Footer />
       </Stack>
       <PdfCartFloating />
+      <FloatingTopButton />
     </Stack>
   );
 }
