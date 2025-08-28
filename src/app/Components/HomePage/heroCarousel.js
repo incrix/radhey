@@ -71,11 +71,11 @@ export default function HeroCarousel() {
           width: 100%;
         }
 
-        /* Mobile override: fixed 550px height */
+        /* Mobile override: fixed 650px height */
         @media (max-width: 600px) {
           .carousel-item {
             padding-top: 0;
-            height: 100%;
+            height: 650px;
           }
         }
 
