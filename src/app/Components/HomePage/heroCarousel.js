@@ -5,11 +5,16 @@ import Image from "next/image";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useMediaQuery } from "@mui/material";
 
 import Carousel1 from "@/public/Images/heroOne.svg";
 import Carousel2 from "@/public/Images/heroTwo.svg";
+import Carousel3 from "@/public/Images/heroFour.png";
+import Carousel4 from "@/public/Images/heroFour.png";
 
 export default function HeroCarousel() {
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   const settings = {
     dots: true,
     infinite: true,
@@ -20,6 +25,17 @@ export default function HeroCarousel() {
     autoplaySpeed: 3000,
     arrows: false,
   };
+
+  // Define images based on screen size
+  const images = isMobile
+    ? [
+        { src: Carousel3.src, alt: "Hero Image 3" },
+        { src: Carousel4.src, alt: "Hero Image 4" },
+      ]
+    : [
+        { src: Carousel1.src, alt: "Hero Image 1" },
+        { src: Carousel2.src, alt: "Hero Image 2" },
+      ];
 
   return (
     <Stack
@@ -38,26 +54,18 @@ export default function HeroCarousel() {
         }}
       >
         <Slider {...settings}>
-          <div className="carousel-item">
-            <Image
-              width={100}
-              height={100}
-              src={Carousel1.src}
-              alt="Hero Image 1"
-              style={{ objectFit: "cover", width: "100%", height: "100%" }}
-              priority
-            />
-          </div>
-
-          <div className="carousel-item">
-            <Image
-              width={100}
-              height={100}
-              src={Carousel2.src}
-              alt="Hero Image 2"
-              style={{ objectFit: "cover", width: "100%", height: "100%" }}
-            />
-          </div>
+          {images.map((image, index) => (
+            <div className="carousel-item" key={index}>
+              <Image
+                width={100}
+                height={100}
+                src={image.src}
+                alt={image.alt}
+                style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                priority={index === 0} // Only prioritize the first image
+              />
+            </div>
+          ))}
         </Slider>
       </Stack>
 
@@ -72,7 +80,7 @@ export default function HeroCarousel() {
         @media (max-width: 600px) {
           .carousel-item {
             padding-top: 0;
-            height: 550px;
+            height: 100%;
           }
         }
 

@@ -163,11 +163,11 @@ export default function ProductCard({ product }) {
           <Typography
             variant="p"
             color={"var(--text-color-trinary)"}
-            fontSize={"12px"}
             pt={{
               xs: "5px",
               sm: "10px",
             }}
+            fontSize={{ xs: "14px", md: "16px" }}
             onClick={() => {
               pathArray.length > 2 && pathArray[2] === "shop"
                 ? router.push(`product?id=${product.id}`)
@@ -343,7 +343,7 @@ export default function ProductCard({ product }) {
                   // backgroundColor: "var(--primary)",
                   minWidth: "30px",
                   textAlign: "center",
-                  fontSize: { xs: "12px", md: "18px" },
+                  fontSize: { xs: "16px", md: "18px" },
                   fontWeight: "bold",
                   color: "var(--primary)",
                   width: { xs: "50px", md: "100%" },
