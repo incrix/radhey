@@ -7,10 +7,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useMediaQuery } from "@mui/material";
 
-import Carousel1 from "@/public/Images/heroOne.svg";
-import Carousel2 from "@/public/Images/heroTwo.svg";
-import Carousel3 from "@/public/Images/heroThree.png";
-import Carousel4 from "@/public/Images/heroThree.png";
+import Carousel1 from "@/public/Images/banner1.png";
+import Carousel2 from "@/public/Images/banner2.png";
+import Carousel3 from "@/public/Images/mobileBanner1.png";
+import Carousel4 from "@/public/Images/mobileBanner2.png";
 
 export default function HeroCarousel() {
   const isMobile = useMediaQuery("(max-width:600px)");
