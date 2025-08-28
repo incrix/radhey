@@ -58,8 +58,10 @@ export default function PageRender({ billingDetails, productList }) {
               </Text>
               <Text style={{ width: "50%", textAlign: "right" }}>
                 <Image
+                  width={100}
+                  height={100}
                   src={Rupee.src}
-                  style={{ width: 6, objectFit: "contain" }}
+                  style={{ width: 6, objectFit: "contain", height: "auto" }}
                 />
                 {productList
                   .reduce((a, { price, count }) => a + price * count, 0)
@@ -78,8 +80,10 @@ export default function PageRender({ billingDetails, productList }) {
               </Text>
               <Text style={{ width: "50%", textAlign: "right" }}>
                 <Image
+                  width={100}
+                  height={100}
                   src={Rupee.src}
-                  style={{ width: 6, objectFit: "contain" }}
+                  style={{ width: 6, objectFit: "contain", height: "auto" }}
                 />
                 {productList
                   .reduce(
@@ -117,8 +121,10 @@ export default function PageRender({ billingDetails, productList }) {
               }}
             >
               <Image
+                width={100} 
+                height={100}
                 src={Rupee.src}
-                style={{ width: 8, objectFit: "contain" }}
+                style={{ width: 8, objectFit: "contain", height: "auto" }}
               />
               {productList.reduce(
                 (a, { price, discount, count }) =>

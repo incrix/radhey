@@ -6,6 +6,8 @@ export default function RenderInvoiceHeader() {
   return (
     <View fixed style={{ flexDirection: "row", gap: 10 }}>
       <Image
+        width={100}
+        height={100}
         src={Logo.src}
         style={{
           width: 80,

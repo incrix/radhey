@@ -95,12 +95,15 @@ export default function Offer() {
           >
             <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Image
-                src={RetailBoxes}
+                width={100}
+                height={100}
+                src={RetailBoxes.src}
                 alt="Retail Excellence"
                 style={{
                   borderRadius: "8px",
                   maxWidth: "100%",
                   height: "auto",
+                  width: "100%",
                 }}
               />
             </Box>
@@ -203,10 +206,16 @@ export default function Offer() {
 
             <Stack sx={{ mt: 7, alignItems: "center" }}>
               <Image
-                src={WholeSale}
+                width={100}
+                height={100}
+                src={WholeSale.src}
                 alt="Wholesale"
-                width={300}
-                style={{ borderRadius: "8px", maxWidth: "100%" }}
+                style={{
+                  borderRadius: "8px",
+                  maxWidth: "100%",
+                  width: "100%",
+                  height: "auto",
+                }}
               />
             </Stack>
 

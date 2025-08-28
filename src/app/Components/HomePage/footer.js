@@ -57,11 +57,12 @@ export default function Footer() {
           <Stack maxWidth={"300px"} gap={2}>
             <Stack direction="row" gap={1} alignItems="center">
               <Image
-                src={logo}
+                src={logo.src}
                 alt="Radhey Fireworks Logo" // ✅ alt text added
                 width={80}
                 height={80}
                 priority
+                style={{ width: "80px", height: "80px" }}
               />
               <Stack>
                 <span
@@ -196,12 +197,19 @@ export default function Footer() {
               Certified
             </Typography>
             <Image
-              src={green}
+              src={green.src}
               alt="Green Certification"
               width={100}
               height={100}
+              style={{ width: "100%", height: "auto" }}
             />
-            <Image src={iso} alt="ISO Certification" width={100} height={100} />
+            <Image
+              src={iso.src}
+              alt="ISO Certification"
+              width={100}
+              height={100}
+              style={{ width: "100%", height: "auto" }}
+            />
           </Stack>
         </Stack>
 
@@ -245,6 +253,7 @@ export default function Footer() {
                   alt="Incrix Logo"
                   width={120}
                   height={25}
+                  style={{ width: "120px", height: "25px" }}
                 />
               </a>
             </p>

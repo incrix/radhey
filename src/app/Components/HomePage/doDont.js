@@ -64,7 +64,13 @@ export default function DoDont() {
               justifyContent: "center",
             }}
           >
-            <Image src={DoThumbsUp} alt="Do Thumbs Up" width={50} height={50} />
+            <Image
+              src={DoThumbsUp.src}
+              alt="Do Thumbs Up"
+              width={50}
+              height={50}
+              style={{ width: "50px", height: "50px" }}
+            />
             <Typography variant="h4" fontWeight={700}>
               Do’s
             </Typography>
@@ -169,10 +175,11 @@ export default function DoDont() {
               Don’ts
             </Typography>
             <Image
-              src={DontThumbsDown}
+              src={DontThumbsDown.src}
               alt="Dont Thumbs Down"
               width={50}
               height={50}
+              style={{ width: "50px", height: "50px" }}
             />
           </Stack>
 

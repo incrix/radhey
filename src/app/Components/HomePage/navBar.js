@@ -81,7 +81,7 @@ export default function NavBar() {
             alt="Ponnus"
             width={45}
             height={50}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", width: "45px", height: "50px" }}
           />
 
           {/* Desktop Nav Links */}

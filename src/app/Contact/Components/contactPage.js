@@ -339,10 +339,11 @@ function ContactForm() {
         }}
       >
         <Image
-          src={ContactPng}
+          width={100}
+          height={100}
+          src={ContactPng.src}
           alt="Contact illustration" // meaningful alt text
           style={{ width: "100%", height: "auto" }}
-          placeholder="blur" // optional: adds blur placeholder
         />
       </Stack>
     </Stack>

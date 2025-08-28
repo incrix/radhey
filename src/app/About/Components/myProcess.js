@@ -83,14 +83,14 @@ export default function MyProcess() {
             mt={2}
           >
             <Image
-              src={SparkOne}
+              src={SparkOne.src}
               alt="Spark One"
               width={340}
               height={600}
               style={{ borderRadius: "8px", width: "100%" }}
             />
             <Image
-              src={SparkTwo}
+              src={SparkTwo.src}
               alt="Spark Two"
               width={340}
               height={600}

@@ -103,7 +103,9 @@ export default function AboutUs() {
       {/* Right Section - 40% */}
       <Stack flex={{ xs: 1, md: 0.4 }} alignItems="center">
         <Image
-          src={fourImagePic}
+          width={100}
+          height={100}
+          src={fourImagePic.src}
           alt="About Us Images"
           style={{ width: "100%", height: "auto", borderRadius: "12px" }}
         />
