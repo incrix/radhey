@@ -7,11 +7,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useMediaQuery } from "@mui/material";
 
-import Carousel1 from "@/public/Images/banner1.png";
-import Carousel2 from "@/public/Images/banner2.png";
-import Carousel3 from "@/public/Images/mobileBanner1.png";
-import Carousel4 from "@/public/Images/mobileBanner2.png";
-
 export default function HeroCarousel() {
   const isMobile = useMediaQuery("(max-width:600px)");
 
@@ -26,15 +21,15 @@ export default function HeroCarousel() {
     arrows: false,
   };
 
-  // Define images based on screen size
+  // Define images based on screen size using provided URLs
   const images = isMobile
     ? [
-        { src: Carousel3.src, alt: "Hero Image 3" },
-        { src: Carousel4.src, alt: "Hero Image 4" },
+        { src: "https://e-com.incrix.com/Radhey/mobileBanner1.png", alt: "Mobile Banner 1" },
+        { src: "https://e-com.incrix.com/Radhey/mobileBanner2.png", alt: "Mobile Banner 2" },
       ]
     : [
-        { src: Carousel1.src, alt: "Hero Image 1" },
-        { src: Carousel2.src, alt: "Hero Image 2" },
+        { src: "https://e-com.incrix.com/Radhey/banner1.png", alt: "Banner 1" },
+        { src: "https://e-com.incrix.com/Radhey/banner2.png", alt: "Banner 2" },
       ];
 
   return (
@@ -96,7 +91,7 @@ export default function HeroCarousel() {
         }
 
         .slick-dots li button:before {
-          font-size: 10px;
+          fontSize: 10px;
           color: white;
           opacity: 0.7;
         }
