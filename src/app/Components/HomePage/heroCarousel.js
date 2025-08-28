@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import Carousel1 from "@/public/Images/heroOne.svg";
-import Carousel2 from "@/public/Images/heroTwo.jpg";
+import Carousel2 from "@/public/Images/heroTwo.svg";
 
 export default function HeroCarousel() {
   const settings = {
@@ -40,20 +40,22 @@ export default function HeroCarousel() {
         <Slider {...settings}>
           <div className="carousel-item">
             <Image
-              src={Carousel1}
+              width={100}
+              height={100}
+              src={Carousel1.src}
               alt="Hero Image 1"
-              fill
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "cover", width: "100%", height: "100%" }}
               priority
             />
           </div>
 
           <div className="carousel-item">
             <Image
-              src={Carousel2}
+              width={100}
+              height={100}
+              src={Carousel2.src}
               alt="Hero Image 2"
-              fill
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "cover", width: "100%", height: "100%" }}
             />
           </div>
         </Slider>
@@ -64,7 +66,6 @@ export default function HeroCarousel() {
         .carousel-item {
           position: relative;
           width: 100%;
-          padding-top: 50%;
         }
 
         /* Mobile override: fixed 550px height */
