@@ -8,7 +8,7 @@ export async function POST(request) {
     billingDetails,
     invoice,
   });
-  console.log("Order placed successfully", billingDetails, productList, invoice);
+  // console.log("Order placed successfully", billingDetails, productList, invoice);
   return Response.json({
     message: "Order placed successfully",
     status: "success",

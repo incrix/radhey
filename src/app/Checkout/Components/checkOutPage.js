@@ -364,10 +364,10 @@ function OrderSummary({ setCheckoutState }) {
                 .then((data) => {
                   if (data.status == "success") {
                     setAlertMessage("Order placed successfully");
-                    setOpen(true);
-                    localStorage.setItem("cart", JSON.stringify([]));
-                    setCart([]);
-                    setCheckoutState("billing");
+                    // setOpen(true);
+                    // localStorage.setItem("cart", JSON.stringify([]));
+                    // setCart([]);
+                    // setCheckoutState("billing");
                     setLoading(false);
                   }
                 });
