@@ -9,8 +9,8 @@ import { useMediaQuery } from "@mui/material";
 
 import Carousel1 from "@/public/Images/heroOne.svg";
 import Carousel2 from "@/public/Images/heroTwo.svg";
-import Carousel3 from "@/public/Images/heroFour.png";
-import Carousel4 from "@/public/Images/heroFour.png";
+import Carousel3 from "@/public/Images/heroThree.png";
+import Carousel4 from "@/public/Images/heroThree.png";
 
 export default function HeroCarousel() {
   const isMobile = useMediaQuery("(max-width:600px)");
