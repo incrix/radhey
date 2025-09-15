@@ -64,7 +64,7 @@ export default function PageRender({ billingDetails, productList }) {
                 Sub Total :
               </Text>
               <Text style={{ width: "50%", textAlign: "right" }}>
-                Rs{" "}
+                Rs:{" "}
                 {productList
                   .reduce((a, { price, count }) => a + price * count, 0)
                   .toFixed(2)}
@@ -83,7 +83,7 @@ export default function PageRender({ billingDetails, productList }) {
                 Discount :
               </Text>
               <Text style={{ width: "50%", textAlign: "right" }}>
-                Rs{" "}
+                Rs:{" "}
                 {productList
                   .reduce(
                     (a, { discount, price, count }) =>
@@ -121,7 +121,7 @@ export default function PageRender({ billingDetails, productList }) {
                 textAlign: "right",
               }}
             >
-              Rs{" "}
+              Rs:{" "}
               {productList
                 .reduce(
                   (a, { price, discount, count }) =>
