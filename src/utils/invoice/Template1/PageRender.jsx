@@ -1,6 +1,5 @@
 "use client";
-import { Page, Text, View, StyleSheet, Image } from "@react-pdf/renderer";
-import Rupee from "@/public/Images/rupee.png";
+import { Page, Text, View } from "@react-pdf/renderer";
 import RenderItems from "./RenderItems";
 import RenderCustomerDetails from "./RenderCustomerDetails";
 import RenderInvoiceHeader from "./RenderInvoiceHeader";
@@ -15,13 +14,16 @@ export default function PageRender({ billingDetails, productList }) {
         padding: 20,
       }}
     >
-      {/* //Header */}
+      {/* Header */}
       <RenderInvoiceHeader />
-      {/* //Customer Details & Invoice Details */}
+
+      {/* Customer Details & Invoice Details */}
       <RenderCustomerDetails billingDetails={billingDetails} />
-      {/* //Render Item Table */}
+
+      {/* Item Table */}
       <RenderItems productList={productList} />
-      {/* //Total Amount */}
+
+      {/* Totals Section */}
       <View
         wrap={false}
         style={{
@@ -30,6 +32,7 @@ export default function PageRender({ billingDetails, productList }) {
           flexDirection: "row",
         }}
       >
+        {/* Left Side */}
         <View
           style={{
             fontSize: 8,
@@ -44,8 +47,12 @@ export default function PageRender({ billingDetails, productList }) {
             {productList.reduce((a, { count }) => a + count, 0)}
           </Text>
         </View>
+
+        {/* Right Side */}
         <View style={{ width: "50%" }}>
+          {/* Sub Total & Discount */}
           <View style={{ padding: 5, gap: 5, borderBottom: "1px solid #333" }}>
+            {/* Sub Total */}
             <View
               style={{
                 fontSize: 8,
@@ -57,17 +64,14 @@ export default function PageRender({ billingDetails, productList }) {
                 Sub Total :
               </Text>
               <Text style={{ width: "50%", textAlign: "right" }}>
-                <Image
-                  width={100}
-                  height={100}
-                  src={Rupee.src}
-                  style={{ width: 6, objectFit: "contain", height: "auto" }}
-                />
+                Rs{" "}
                 {productList
                   .reduce((a, { price, count }) => a + price * count, 0)
                   .toFixed(2)}
               </Text>
             </View>
+
+            {/* Discount */}
             <View
               style={{
                 fontSize: 8,
@@ -79,12 +83,7 @@ export default function PageRender({ billingDetails, productList }) {
                 Discount :
               </Text>
               <Text style={{ width: "50%", textAlign: "right" }}>
-                <Image
-                  width={100}
-                  height={100}
-                  src={Rupee.src}
-                  style={{ width: 6, objectFit: "contain", height: "auto" }}
-                />
+                Rs{" "}
                 {productList
                   .reduce(
                     (a, { discount, price, count }) =>
@@ -95,6 +94,8 @@ export default function PageRender({ billingDetails, productList }) {
               </Text>
             </View>
           </View>
+
+          {/* Total Amount */}
           <View
             style={{
               padding: 5,
@@ -120,23 +121,20 @@ export default function PageRender({ billingDetails, productList }) {
                 textAlign: "right",
               }}
             >
-              <Image
-                width={100} 
-                height={100}
-                src={Rupee.src}
-                style={{ width: 8, objectFit: "contain", height: "auto" }}
-              />
-              {productList.reduce(
-                (a, { price, discount, count }) =>
-                  a + (price - (price * discount) / 100) * count,
-                0
-              )}
+              Rs{" "}
+              {productList
+                .reduce(
+                  (a, { price, discount, count }) =>
+                    a + (price - (price * discount) / 100) * count,
+                  0
+                )
+                .toFixed(2)}
             </Text>
           </View>
         </View>
       </View>
 
-      {/* //Page Number && Footer */}
+      {/* Footer */}
       <RenderInvoiceFooter />
     </Page>
   );

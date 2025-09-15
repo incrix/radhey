@@ -16,40 +16,33 @@ import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRound
 import NavBar from "@/src/app/Components/HomePage/navBar";
 import Footer from "@/src/app/Components/HomePage/footer";
 import Image from "next/image";
+import { useProducts } from "@/src/app/context/ProductContext";
+import { useCart } from "@/src/app/context/CartContext";
 
 export default function ProductPage() {
   const searchParams = useSearchParams();
   const search = searchParams.get("id");
   const router = useRouter();
-  const [productList, setProductList] = useState([]);
+  const { productList, loading } = useProducts(); // ✅ from ProductContext
+  const { addToCart } = useCart(); // ✅ from CartContext
+
   const [product, setProduct] = useState(null);
   const [itemCount, setItemCount] = useState(1);
 
   useEffect(() => {
-    let productFromLocalStorage = JSON.parse(
-      localStorage.getItem("productList")
-    );
-    if (!productFromLocalStorage || productFromLocalStorage.length === 0) {
-      fetch("https://e-com.incrix.com/Sankamithra%20Products/productData.json")
-        .then((response) => response.json())
-        .then((data) => {
-          localStorage.setItem("productList", JSON.stringify(data));
-          setProduct(data.find((product) => product.id == search));
-          setProductList(data);
-        });
-    } else {
-      setProduct(
-        productFromLocalStorage.find((product) => product.id == search)
-      );
-      setProductList(productFromLocalStorage);
+    if (!loading && productList.length > 0) {
+      const found = productList.find((p) => p.id == search);
+      setProduct(found || null);
     }
-  }, [search]);
+  }, [search, productList, loading]);
 
-  useEffect(() => {
-    if (productList.length !== 0) {
-      setProduct(productList.find((product) => product.id == search));
-    }
-  }, [search, productList]);
+  if (loading) {
+    return (
+      <Stack sx={{ mt: 20, textAlign: "center" }}>
+        <Typography variant="h6">Loading product...</Typography>
+      </Stack>
+    );
+  }
 
   return (
     <Stack>
@@ -286,19 +279,7 @@ export default function ProductPage() {
                           backgroundColor: "var(--tertiary)",
                         },
                       }}
-                      onClick={() => {
-                        let cart =
-                          JSON.parse(localStorage.getItem("cart")) || [];
-                        let item = cart.filter(
-                          (item) => item.id == product.id
-                        )[0];
-                        if (item) {
-                          item.count += itemCount;
-                        } else {
-                          cart.push({ ...product, count: itemCount });
-                        }
-                        localStorage.setItem("cart", JSON.stringify(cart));
-                      }}
+                      onClick={() => addToCart(product, itemCount)}
                     >
                       Add to Cart
                     </Button>

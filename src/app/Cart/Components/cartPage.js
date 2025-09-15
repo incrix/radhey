@@ -9,14 +9,15 @@ import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-
 import Link from "next/link";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { Quicksand } from "next/font/google";
-const quicksand = Quicksand({ subsets: ["latin"] });
 import { Delete } from "@mui/icons-material";
-import { useState, useEffect } from "react";
+
+import { useCart } from "@/src/app/context/CartContext"; // ✅ use CartContext
+
+const quicksand = Quicksand({ subsets: ["latin"] });
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,36 +37,16 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 export default function CartPage() {
-  const [cart, setCart] = useState([]);
+  const { cart, updateCount, removeFromCart, totalPrice } = useCart(); // ✅ from context
 
-  useEffect(() => {
-    const cartList = localStorage.getItem("cart")
-      ? JSON.parse(localStorage.getItem("cart"))
-      : [];
-    setCart(cartList);
-  }, []);
-  const handleIncrement = (index) => {
-    const newCart = [...cart];
-    newCart[index].count += 1;
-    setCart(newCart);
-    localStorage.setItem("cart", JSON.stringify(newCart));
+  const handleIncrement = (id, current) => {
+    updateCount(id, current + 1);
   };
 
-  const handleDecrement = (index) => {
-    if (cart[index].count === 1) {
-      return;
+  const handleDecrement = (id, current) => {
+    if (current > 1) {
+      updateCount(id, current - 1);
     }
-    const newCart = [...cart];
-    newCart[index].count -= 1;
-    setCart(newCart);
-    localStorage.setItem("cart", JSON.stringify(newCart));
-  };
-
-  const handleRemove = (index) => {
-    const newCart = [...cart];
-    newCart.splice(index, 1);
-    setCart(newCart);
-    localStorage.setItem("cart", JSON.stringify(newCart));
   };
 
   return (
@@ -96,10 +77,8 @@ export default function CartPage() {
           >
             Your Cart
           </Typography>
-          {/* <Typography className={quicksand.className} fontSize={14}>
-            There are no items in your cart.
-          </Typography> */}
         </Stack>
+
         <Stack
           direction={{
             sm: "column",
@@ -107,6 +86,7 @@ export default function CartPage() {
           }}
           gap={10}
         >
+          {/* CART TABLE */}
           <Stack
             width={{
               sm: "100%",
@@ -151,88 +131,89 @@ export default function CartPage() {
                       </StyledTableCell>
                     </StyledTableRow>
                   )}
-                  {cart.map((row, index) => (
-                    <StyledTableRow key={row.name}>
-                      <StyledTableCell component="th" scope="row">
-                        {row.name}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        <Stack direction={"row"}>
-                          <IconButton
-                            sx={{
-                              color: "white",
-                              fontSize: "14px",
-                              fontWeight: "bold",
-                              width: "30px",
-                              height: "30px",
-                              backgroundColor: "var(--secondary)",
-                              "&:hover": {
+                  {cart.map((row) => {
+                    const unitPrice = Math.round(
+                      row.price - (row.price * row.discount) / 100
+                    );
+                    return (
+                      <StyledTableRow key={row.id}>
+                        <StyledTableCell component="th" scope="row">
+                          {row.name}
+                        </StyledTableCell>
+                        <StyledTableCell>
+                          <Stack direction={"row"} alignItems="center">
+                            <IconButton
+                              sx={{
+                                color: "white",
+                                fontSize: "14px",
+                                fontWeight: "bold",
+                                width: "30px",
+                                height: "30px",
                                 backgroundColor: "var(--secondary)",
-                              },
-                            }}
-                            onClick={() => handleDecrement(index)}
-                          >
-                            -
-                          </IconButton>
-                          <Typography
-                            sx={{
-                              textAlign: "center",
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              fontSize: "14px",
-                              fontWeight: "bold",
-                              width: "40px",
-                            }}
-                          >
-                            {row.count}
-                          </Typography>
+                                "&:hover": {
+                                  backgroundColor: "var(--secondary)",
+                                },
+                              }}
+                              onClick={() => handleDecrement(row.id, row.count)}
+                            >
+                              -
+                            </IconButton>
+                            <Typography
+                              sx={{
+                                textAlign: "center",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                fontSize: "14px",
+                                fontWeight: "bold",
+                                width: "40px",
+                              }}
+                            >
+                              {row.count}
+                            </Typography>
+                            <IconButton
+                              size="small"
+                              sx={{
+                                color: "white",
+                                fontSize: "14px",
+                                fontWeight: "bold",
+                                width: "30px",
+                                height: "30px",
+                                backgroundColor: "var(--secondary)",
+                                "&:hover": {
+                                  backgroundColor: "var(--secondary)",
+                                },
+                              }}
+                              onClick={() => handleIncrement(row.id, row.count)}
+                            >
+                              +
+                            </IconButton>
+                          </Stack>
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {unitPrice}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {unitPrice * row.count}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
                           <IconButton
                             size="small"
-                            sx={{
-                              color: "white",
-                              fontSize: "14px",
-                              fontWeight: "bold",
-                              width: "30px",
-                              height: "30px",
-                              backgroundColor: "var(--secondary)",
-                              "&:hover": {
-                                backgroundColor: "var(--secondary)",
-                              },
-                            }}
-                            onClick={() => handleIncrement(index)}
+                            sx={{ color: "red" }}
+                            onClick={() => removeFromCart(row.id)}
                           >
-                            +
+                            <Delete />
                           </IconButton>
-                        </Stack>
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {Math.round(
-                          row.price - (row.price * row.discount) / 100
-                        )}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {Math.round(
-                          row.price - (row.price * row.discount) / 100
-                        ) * row.count}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        <IconButton
-                          size="small"
-                          sx={{
-                            color: "red",
-                          }}
-                          onClick={() => handleRemove(index)}
-                        >
-                          <Delete />
-                        </IconButton>
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))}
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    );
+                  })}
                 </TableBody>
               </Table>
             </TableContainer>
           </Stack>
+
+          {/* CART SUMMARY */}
           <Stack
             width={{
               sm: "100%",
@@ -249,39 +230,15 @@ export default function CartPage() {
                 >
                   Cart Summary
                 </Typography>
-                <Stack gap={2}>
-                  {/* <Typography className={quicksand.className} fontSize={14}>
-                    Subtotal: ₹
-                    {cart.reduce(
-                      (acc, item) =>
-                        acc +
-                        Math.round(
-                          item.price - (item.price * item.discount) / 100
-                        ) *
-                          item.count,
-                      0
-                    )}
-                  </Typography> */}
-                  {/* <Typography className={quicksand.className} fontSize={14}>
-                    Shipping: $0.00
-                  </Typography> */}
-                  <Typography
-                    className={quicksand.className}
-                    fontSize={14}
-                    fontWeight={700}
-                  >
-                    Total: ₹
-                    {cart.reduce(
-                      (acc, item) =>
-                        acc +
-                        Math.round(
-                          item.price - (item.price * item.discount) / 100
-                        ) *
-                          item.count,
-                      0
-                    )}
-                  </Typography>
-                </Stack>
+
+                <Typography
+                  className={quicksand.className}
+                  fontSize={14}
+                  fontWeight={700}
+                >
+                  Total: ₹{totalPrice}
+                </Typography>
+
                 <Stack gap={2}>
                   <Button
                     disableElevation
@@ -297,15 +254,13 @@ export default function CartPage() {
                     disabled={cart.length === 0}
                   >
                     <Link
-                      style={{
-                        textDecoration: "none",
-                        color: "white",
-                      }}
+                      style={{ textDecoration: "none", color: "white" }}
                       href="/Checkout"
                     >
                       Proceed to Checkout
                     </Link>
                   </Button>
+
                   <Button
                     disableElevation
                     variant="outlined"

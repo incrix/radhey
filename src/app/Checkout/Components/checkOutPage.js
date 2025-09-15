@@ -20,6 +20,8 @@ import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRound
 import { pdf } from "@react-pdf/renderer";
 import Template1 from "@/src/utils/invoice/Template1/Template";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { useBilling } from "@/src/app/context/BillingContext";
+import { useCart } from "@/src/app/context/CartContext";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,89 +35,63 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(() => ({
-  //   "&:nth-of-type(odd)": {
-  // backgroundColor: "white",
-  //   },
   "& td, & th": {
-    borderBottom: "1px solid var(--border-color)",
+    borderBottom: "1px solid var( --border)",
   },
 }));
 
 export default function Page() {
   const [checkoutState, setCheckoutState] = useState("billing");
   const [open, setOpen] = useState(false);
-  const [billingDetails, setBillingDetails] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    state: "",
-    zip: "",
-  });
+
+  // ✅ use billing hook
+  const { billingDetails, setBillingDetails } = useBilling();
 
   const onBillingDetailsChange = (e) => {
     setBillingDetails({ ...billingDetails, [e.target.name]: e.target.value });
-    localStorage.setItem(
-      "billingDetails",
-      JSON.stringify({ ...billingDetails, [e.target.name]: e.target.value })
-    );
   };
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+  const handleClose = (_, reason) => {
+    if (reason === "clickaway") return;
     setOpen(false);
   };
 
-  useEffect(() => {
-    const stored = localStorage.getItem("billingDetails");
-    if (stored) {
-      setBillingDetails(JSON.parse(stored));
-    }
-  }, []);
-
-  // Keep localStorage updated whenever billingDetails changes
-  useEffect(() => {
-    localStorage.setItem("billingDetails", JSON.stringify(billingDetails));
-  }, [billingDetails]);
-
   const handleClick = () => {
     if (
-      billingDetails.name == "" ||
-      billingDetails.email == "" ||
-      billingDetails.phone == "" ||
-      billingDetails.address == "" ||
-      billingDetails.city == "" ||
-      billingDetails.state == "" ||
-      billingDetails.zip == ""
+      !billingDetails.name ||
+      !billingDetails.email ||
+      !billingDetails.phone ||
+      !billingDetails.address ||
+      !billingDetails.city ||
+      !billingDetails.state ||
+      !billingDetails.zip
     ) {
       setOpen(true);
       return;
     }
-    if (billingDetails.phone.length != 10) {
+    if (billingDetails.phone.length !== 10) {
       setOpen(true);
       return;
     }
-    if (billingDetails.zip.length != 6) {
+    if (billingDetails.zip.length !== 6) {
       setOpen(true);
       return;
     }
-    if (billingDetails.email.indexOf("@") == -1) {
+    if (billingDetails.email.indexOf("@") === -1) {
       setOpen(true);
       return;
     }
     setCheckoutState("order");
   };
+
   return (
-    <Stack
-      sx={{
+    <main
+      style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         width: "100%",
-        padding: { xs: 0, md: 3 },
+        padding: "0 40px",
       }}
     >
       <Snackbar
@@ -136,7 +112,7 @@ export default function Page() {
       <Stack
         sx={{
           width: "100%",
-          maxWidth: "100%",
+          maxWidth: "var(--max-width)",
           padding: "40px 0",
           gap: 5,
         }}
@@ -151,42 +127,39 @@ export default function Page() {
           Checkout
         </Typography>
         <StepIndicator checkoutState={checkoutState} />
-        {checkoutState == "billing" && (
+        {checkoutState === "billing" && (
           <BillingDetails
             handleClick={handleClick}
             billingDetails={billingDetails}
             onBillingDetailsChange={onBillingDetailsChange}
           />
         )}
-        {checkoutState == "order" && (
+        {checkoutState === "order" && (
           <OrderSummary setCheckoutState={setCheckoutState} />
         )}
       </Stack>
-    </Stack>
+    </main>
   );
 }
 
 function OrderSummary({ setCheckoutState }) {
-  const [cart, setCart] = useState([]);
+  const { cart, clearCart } = useCart(); // ✅ use cart hook
+  const { billingDetails } = useBilling();
+
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+
+  const handleClose = (_, reason) => {
+    if (reason === "clickaway") return;
     setOpen(false);
   };
-  useEffect(() => {
-    setCart(JSON.parse(localStorage.getItem("cart")) || []);
-  }, []);
 
   return (
     <Stack gap={2}>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         open={open}
-        // autoHideDuration={6000}
         onClose={handleClose}
       >
         <Alert
@@ -228,18 +201,10 @@ function OrderSummary({ setCheckoutState }) {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className={quicksand.className}>
-                  Products
-                </StyledTableCell>
-                <StyledTableCell className={quicksand.className}>
-                  Quantity
-                </StyledTableCell>
-                <StyledTableCell className={quicksand.className} align="right">
-                  Unit price
-                </StyledTableCell>
-                <StyledTableCell className={quicksand.className} align="right">
-                  Subtotal
-                </StyledTableCell>
+                <StyledTableCell>Products</StyledTableCell>
+                <StyledTableCell>Quantity</StyledTableCell>
+                <StyledTableCell align="right">Unit price</StyledTableCell>
+                <StyledTableCell align="right">Subtotal</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -250,26 +215,10 @@ function OrderSummary({ setCheckoutState }) {
                   </StyledTableCell>
                 </StyledTableRow>
               )}
-              {cart.map((row, index) => (
+              {cart.map((row) => (
                 <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.name}
-                  </StyledTableCell>
-                  <StyledTableCell>
-                    <Typography
-                      sx={{
-                        textAlign: "center",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        fontSize: "14px",
-                        fontWeight: "bold",
-                        width: "40px",
-                      }}
-                    >
-                      {row.count}
-                    </Typography>
-                  </StyledTableCell>
+                  <StyledTableCell>{row.name}</StyledTableCell>
+                  <StyledTableCell>{row.count}</StyledTableCell>
                   <StyledTableCell align="right">
                     {Math.round(row.price - (row.price * row.discount) / 100)}
                   </StyledTableCell>
@@ -284,14 +233,8 @@ function OrderSummary({ setCheckoutState }) {
           </Table>
         </TableContainer>
         <Stack justifyContent={"flex-end"} direction={"row"} gap={5}>
-          <Typography className={quicksand.className} fontWeight={"bold"}>
-            Total:
-          </Typography>
-          <Typography
-            className={quicksand.className}
-            fontSize={20}
-            fontWeight={"bold"}
-          >
+          <Typography fontWeight={"bold"}>Total:</Typography>
+          <Typography fontSize={20} fontWeight={"bold"}>
             ₹{" "}
             {cart.reduce(
               (acc, item) =>
@@ -307,7 +250,7 @@ function OrderSummary({ setCheckoutState }) {
       <Typography
         className={quicksand.className}
         fontWeight={"bold"}
-        color={"var(--text-color-trinary)"}
+        color={"#000"}
       >
         As per 2018 supreme court order, online sale of firecrackers are not
         permitted! We value our customers and at the same time, respect
@@ -317,12 +260,11 @@ function OrderSummary({ setCheckoutState }) {
         Please add and submit your orders and enjoy your Diwali with Fast
         Crackers.
       </Typography>
+
       <Stack direction={"row"} justifyContent={"flex-end"}>
         <LoadingButton
           variant="contained"
           loading={loading}
-          loadingPosition="start"
-          disableElevation
           disabled={cart.length === 0}
           sx={{
             backgroundColor: "var(--primary)",
@@ -335,12 +277,7 @@ function OrderSummary({ setCheckoutState }) {
           onClick={async () => {
             setLoading(true);
             const pdfStream = await pdf(
-              <Template1
-                billingDetails={JSON.parse(
-                  localStorage.getItem("billingDetails")
-                )}
-                productList={cart}
-              />
+              <Template1 billingDetails={billingDetails} productList={cart} />
             ).toBuffer();
             const chunks = [];
             pdfStream.on("data", (chunk) => chunks.push(chunk));
@@ -353,20 +290,17 @@ function OrderSummary({ setCheckoutState }) {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  billingDetails: JSON.parse(
-                    localStorage.getItem("billingDetails")
-                  ),
+                  billingDetails,
                   productList: cart,
                   invoice: base64String,
                 }),
               })
                 .then((res) => res.json())
                 .then((data) => {
-                  if (data.status == "success") {
+                  if (data.status === "success") {
                     setAlertMessage("Order placed successfully");
                     setOpen(true);
-                    localStorage.setItem("cart", JSON.stringify([]));
-                    setCart([]);
+                    clearCart();
                     setCheckoutState("billing");
                     setLoading(false);
                   }
@@ -458,157 +392,132 @@ function BillingDetails({
   billingDetails,
   onBillingDetailsChange,
 }) {
-  // console.log(billingDetails);
-
   return (
     <Stack gap={5}>
       <Typography
-        className={quicksand.className}
         variant="h2"
         fontSize={24}
-        color={"var(--primary)"}
-        fontWeight={600}
+        color={"var(--primary-color)"}
+        fontWeight={500}
       >
         Contact Information
       </Typography>
       <Stack gap={2}>
-        <Stack
-          direction={{
-            xs: "column",
-            sm: "row",
-          }}
-          gap={2}
-        >
+        <Stack direction={{ xs: "column", sm: "row" }} gap={2}>
           <TextField
             label="Name"
             variant="outlined"
             name="name"
             value={billingDetails.name}
+            onChange={onBillingDetailsChange}
             sx={{
               width: {
                 xs: "100%",
                 sm: "350px",
               },
             }}
-            onChange={onBillingDetailsChange}
           />
           <TextField
             label="Email"
             variant="outlined"
+            name="email"
             value={billingDetails.email}
+            onChange={onBillingDetailsChange}
             sx={{
               width: {
                 xs: "100%",
                 sm: "350px",
               },
             }}
-            name="email"
-            onChange={onBillingDetailsChange}
           />
         </Stack>
         <TextField
           label="Phone"
           variant="outlined"
+          name="phone"
           value={billingDetails.phone}
+          onChange={onBillingDetailsChange}
           sx={{
             width: {
               xs: "100%",
               sm: "350px",
             },
           }}
-          name="phone"
-          onChange={onBillingDetailsChange}
         />
       </Stack>
       <Typography
-        className={quicksand.className}
         variant="h2"
         fontSize={24}
-        color={"var(--primary)"}
-        fontWeight={600}
+        color={"var(--primary-color)"}
+        fontWeight={500}
       >
         Shipping Address
       </Typography>
       <Stack gap={2}>
-        <Stack
-          direction={{
-            xs: "column",
-            sm: "row",
-          }}
-          gap={2}
-        >
+        <Stack direction={{ xs: "column", sm: "row" }} gap={2}>
           <TextField
             label="Address"
             variant="outlined"
+            name="address"
             value={billingDetails.address}
+            onChange={onBillingDetailsChange}
             sx={{
               width: {
                 xs: "100%",
                 sm: "350px",
               },
             }}
-            name="address"
-            onChange={onBillingDetailsChange}
           />
           <TextField
             label="City"
             variant="outlined"
+            name="city"
             value={billingDetails.city}
+            onChange={onBillingDetailsChange}
             sx={{
               width: {
                 xs: "100%",
                 sm: "350px",
               },
             }}
-            name="city"
-            onChange={onBillingDetailsChange}
           />
         </Stack>
-        <Stack
-          direction={{
-            xs: "column",
-            sm: "row",
-          }}
-          gap={2}
-        >
+        <Stack direction={{ xs: "column", sm: "row" }} gap={2}>
           <TextField
             label="State"
             variant="outlined"
+            name="state"
             value={billingDetails.state}
+            onChange={onBillingDetailsChange}
             sx={{
               width: {
                 xs: "100%",
                 sm: "350px",
               },
             }}
-            name="state"
-            onChange={onBillingDetailsChange}
           />
           <TextField
             label="Zip"
             variant="outlined"
+            name="zip"
             value={billingDetails.zip}
+            onChange={onBillingDetailsChange}
             sx={{
               width: {
                 xs: "100%",
                 sm: "350px",
               },
             }}
-            name="zip"
-            onChange={onBillingDetailsChange}
           />
         </Stack>
       </Stack>
       <Stack>
         <Button
-        disableElevation
           variant="contained"
           sx={{
             backgroundColor: "var(--primary)",
             width: "150px",
-            "&:hover": {
-              backgroundColor: "var(--primary)",
-            },
+            "&:hover": { backgroundColor: "var(--primary)" },
           }}
           onClick={handleClick}
         >

@@ -1,5 +1,8 @@
 import { Quicksand } from "next/font/google";
 import "./globals.css";
+import { CartProvider } from "@/src/app/context/CartContext";
+import { BillingProvider } from "@/src/app/context/BillingContext";
+import { ProductProvider } from "@/src/app/context/ProductContext";
 
 const quicksand = Quicksand({ subsets: ["latin"] });
 
@@ -12,7 +15,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${quicksand.className}`}>
-        {children}
+      <ProductProvider>
+          <CartProvider>
+            <BillingProvider>
+              {children}
+            </BillingProvider>
+          </CartProvider>
+        </ProductProvider>
       </body>
     </html>
   );

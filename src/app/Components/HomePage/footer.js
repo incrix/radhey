@@ -72,7 +72,7 @@ export default function Footer() {
                     color: "#000",
                   }}
                 >
-                  Radhey Fireworks
+                  Radhey Thunders
                 </span>
                 <span
                   style={{
@@ -234,7 +234,7 @@ export default function Footer() {
                 cursor: "pointer",
               }}
             >
-              Radhey Fireworks
+              Radhey Thunders
             </span>
             <br />
             All rights reserved

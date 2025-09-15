@@ -1,17 +1,15 @@
 "use client";
 import { Text, View, Image } from "@react-pdf/renderer";
-import Logo from "@/public/Images/radheyLogo.svg";
+import Logo from "@/src/assets/radheyLogo.png";
 
 export default function RenderInvoiceHeader() {
   return (
     <View fixed style={{ flexDirection: "row", gap: 10 }}>
       <Image
-        width={100}
-        height={100}
         src={Logo.src}
         style={{
-          width: 80,
-          height: 80,
+          width: 60,
+          height: 60,
           objectFit: "contain",
         }}
       />
@@ -23,7 +21,7 @@ export default function RenderInvoiceHeader() {
             textTransform: "uppercase",
           }}
         >
-          Radhey Fireworks
+          Radhey Thunders
         </Text>
         <Text
           style={{
@@ -41,7 +39,7 @@ export default function RenderInvoiceHeader() {
               maxWidth: 200,
             }}
           >
-            Mobile: +91 9842012345
+            Mobile: +91 9360221102
           </Text>
           <Text
             style={{
@@ -49,7 +47,7 @@ export default function RenderInvoiceHeader() {
               maxWidth: 200,
             }}
           >
-            Email: radheyfireworks@gmail.com
+            Email: radheythunders@gmail.com
           </Text>
         </View>
         <Text
@@ -58,7 +56,7 @@ export default function RenderInvoiceHeader() {
             maxWidth: 200,
           }}
         >
-          Website: www.radhey.com/
+          Website: www.radheythunders.com/
         </Text>
       </View>
       <View
