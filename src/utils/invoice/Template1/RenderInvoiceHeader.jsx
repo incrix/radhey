@@ -30,8 +30,8 @@ export default function RenderInvoiceHeader() {
             fontFamily: "Lato",
           }}
         >
-          No. 2/553/V3,Sri Ram Nagar, Sivakasi,Main Road, Mettamalai -626203,
-          Virudhunagar District, Tamil Nadu, India.
+          No. 2/553/V3,Sri Ram Nagar, Sivakasi,Main Road, Mettamalai,
+          Virudhunagar District, Tamil Nadu ,626203, India.
         </Text>
         <View style={{ flexDirection: "row", gap: 10 }}>
           <Text
