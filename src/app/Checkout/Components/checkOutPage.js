@@ -20,8 +20,6 @@ import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRound
 import { pdf } from "@react-pdf/renderer";
 import Template1 from "@/src/utils/invoice/Template1/Template";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { useBilling } from "@/src/app/context/BillingContext";
-import { useCart } from "@/src/app/context/CartContext";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -48,17 +46,40 @@ export default function Page() {
     severity: "error",
   });
 
-  // ✅ use billing hook
-  const { billingDetails, setBillingDetails } = useBilling();
+  const [billingDetails, setBillingDetails] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+  });
 
   const onBillingDetailsChange = (e) => {
     setBillingDetails({ ...billingDetails, [e.target.name]: e.target.value });
+    localStorage.setItem(
+      "billingDetails",
+      JSON.stringify({ ...billingDetails, [e.target.name]: e.target.value })
+    );
   };
 
   const handleCloseSnackbar = (_, reason) => {
     if (reason === "clickaway") return;
     setSnackbar({ ...snackbar, open: false });
   };
+
+  useEffect(() => {
+    const stored = localStorage.getItem("billingDetails");
+    if (stored) {
+      setBillingDetails(JSON.parse(stored));
+    }
+  }, []);
+
+  // Keep localStorage updated whenever billingDetails changes
+  useEffect(() => {
+    localStorage.setItem("billingDetails", JSON.stringify(billingDetails));
+  }, [billingDetails]);
 
   // This function will show the snackbar for the billing form
   const showBillingError = (message) => {
@@ -161,9 +182,12 @@ export default function Page() {
 }
 
 function OrderSummary({ setCheckoutState, showOrderSuccess, showError }) {
-  const { cart, clearCart } = useCart();
-  const { billingDetails } = useBilling();
+  const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem("cart")) || []);
+  }, []);
 
   const totalAmount = cart.reduce(
     (acc, item) =>
@@ -184,7 +208,10 @@ function OrderSummary({ setCheckoutState, showOrderSuccess, showError }) {
     setLoading(true);
 
     const pdfStream = await pdf(
-      <Template1 billingDetails={billingDetails} productList={cart} />
+      <Template1
+        billingDetails={JSON.parse(localStorage.getItem("billingDetails"))}
+        productList={cart}
+      />
     ).toBuffer();
 
     const chunks = [];
@@ -197,7 +224,7 @@ function OrderSummary({ setCheckoutState, showOrderSuccess, showError }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          billingDetails,
+          billingDetails: JSON.parse(localStorage.getItem("billingDetails")),
           productList: cart,
           invoice: base64String,
         }),
@@ -206,14 +233,15 @@ function OrderSummary({ setCheckoutState, showOrderSuccess, showError }) {
         .then((data) => {
           if (data.status === "success") {
             showOrderSuccess("Order placed successfully 🎉");
-            clearCart();
+            localStorage.removeItem("cart");
+            localStorage.removeItem("billingDetails");
             setCheckoutState("billing");
           } else {
             showError("Failed to place order. Please try again.");
           }
         })
         .catch(() => {
-           showError("An error occurred. Please check your connection.");
+          showError("An error occurred. Please check your connection.");
         })
         .finally(() => setLoading(false));
     });

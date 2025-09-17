@@ -7,12 +7,11 @@ import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { ShoppingCart } from "@mui/icons-material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import Image from "next/image";
-import { useCart } from "@/src/app/context/CartContext";
 
 export default function ProductCard({ product }) {
   const [count, setCount] = useState(1);
@@ -21,46 +20,66 @@ export default function ProductCard({ product }) {
   const router = useRouter();
   const pathArray = usePathname().split("/");
 
-  const { cart, addToCart, removeFromCart, updateCount } = useCart();
-
-  // Sync UI state with cart
-  useEffect(() => {
-    const item = cart.find((i) => i.id === product.id);
-    if (item) {
-      setIsAdded(true);
-      setCount(item.count);
-    } else {
-      setIsAdded(false);
-      setCount(1);
-    }
-  }, [cart, product.id]);
+  const [cart, setCart] = useState([]);
 
   const handleIncrement = () => {
     if (isAdded) {
-      updateCount(product.id, count + 1);
+      cart.map((item) => {
+        if (item.id == product.id) {
+          item.count += 1;
+          setCount(item.count);
+          localStorage.setItem("cart", JSON.stringify(cart));
+        }
+      });
     } else {
       setCount(count + 1);
     }
   };
-
   const handleDecrement = () => {
     if (isAdded) {
-      if (count > 1) {
-        updateCount(product.id, count - 1);
-      } else {
-        removeFromCart(product.id);
-        setIsAdded(false);
-        handleOpen();
-      }
+      cart.map((item) => {
+        if (item.id == product.id) {
+          if (item.count > 1) {
+            item.count -= 1;
+            setCount(item.count);
+            localStorage.setItem("cart", JSON.stringify(cart));
+          } else {
+            let newCart = cart.filter((item) => item.id != product.id);
+            localStorage.setItem("cart", JSON.stringify(newCart));
+            setIsAdded(false);
+            handleOpen();
+            setCount(1);
+          }
+        }
+      });
     } else {
       if (count > 1) {
         setCount(count - 1);
       }
     }
   };
-
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
+
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem("cart")) || []);
+  }, []);
+
+  const isProductAdded = useCallback(() => {
+    let item = cart.filter((item) => item.id == product.id)[0];
+    if (item) {
+      setIsAdded(true);
+      setCount(item.count);
+      // console.log(item.count);
+    } else {
+      setIsAdded(false);
+      setCount(1);
+    }
+  }, [cart, product.id]); // Dependencies for useCallback
+
+  useEffect(() => {
+    isProductAdded();
+  }, [cart, isProductAdded]);
 
   return (
     <Paper
@@ -170,20 +189,38 @@ export default function ProductCard({ product }) {
         </Stack>
 
         {/* Buttons */}
-        <Stack direction={{ xs: "column-reverse", md: "row" }} gap={1}>
+        <Stack
+          width={"100%"}
+          direction={{ xs: "column-reverse", md: "row" }}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          paddingTop={2}
+          gap={1}
+        >
           <Button
             disableElevation
             variant="contained"
             startIcon={!isAdded && <ShoppingCart />}
             onClick={() => {
               if (!isAdded) {
-                addToCart(product, count);
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                let item = cart.filter((item) => item.id == product.id)[0];
+                if (item) {
+                  item.count += count;
+                } else {
+                  cart.push({ ...product, count: count });
+                }
+                localStorage.setItem("cart", JSON.stringify(cart));
                 setIsAdded(true);
+                handleOpen();
               } else {
-                removeFromCart(product.id);
+                //remove item from cart
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                let newCart = cart.filter((item) => item.id != product.id);
+                localStorage.setItem("cart", JSON.stringify(newCart));
                 setIsAdded(false);
+                handleOpen();
               }
-              handleOpen();
             }}
             sx={{
               color: "white",
@@ -198,7 +235,7 @@ export default function ProductCard({ product }) {
           </Button>
 
           {/* Quantity Controls */}
-          <Stack direction="row">
+          <Stack direction="row" gap={1}>
             <Button
               variant="contained"
               onClick={handleDecrement}

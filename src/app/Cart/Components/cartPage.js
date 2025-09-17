@@ -14,8 +14,7 @@ import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { Quicksand } from "next/font/google";
 import { Delete } from "@mui/icons-material";
-
-import { useCart } from "@/src/app/context/CartContext"; // ✅ use CartContext
+import { useState, useEffect } from "react";
 
 const quicksand = Quicksand({ subsets: ["latin"] });
 
@@ -37,18 +36,47 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 export default function CartPage() {
-  const { cart, updateCount, removeFromCart, totalPrice } = useCart(); // ✅ from context
+  const [cart, setCart] = useState([]);
 
-  const handleIncrement = (id, current) => {
-    updateCount(id, current + 1);
+  useEffect(() => {
+    const cartList = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+    setCart(cartList);
+  }, []);
+  
+  const handleIncrement = (index) => {
+    const newCart = [...cart];
+    newCart[index].count += 1;
+    setCart(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
   };
 
-  const handleDecrement = (id, current) => {
-    if (current > 1) {
-      updateCount(id, current - 1);
+  const handleDecrement = (index) => {
+    if (cart[index].count === 1) {
+      return;
     }
+    const newCart = [...cart];
+    newCart[index].count -= 1;
+    setCart(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
   };
 
+  const handleRemove = (index) => {
+    const newCart = [...cart];
+    newCart.splice(index, 1);
+    setCart(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+  };
+
+  // compute total with discount same as your old logic
+  const total = cart.reduce(
+    (acc, item) =>
+      acc +
+      Math.round(item.price - (item.price * (item.discount || 0)) / 100) *
+        (item.count || 0),
+    0
+  );
   return (
     <Stack
       sx={{
@@ -131,7 +159,7 @@ export default function CartPage() {
                       </StyledTableCell>
                     </StyledTableRow>
                   )}
-                  {cart.map((row) => {
+                  {cart.map((row, index) => {
                     const unitPrice = Math.round(
                       row.price - (row.price * row.discount) / 100
                     );
@@ -154,7 +182,7 @@ export default function CartPage() {
                                   backgroundColor: "var(--secondary)",
                                 },
                               }}
-                              onClick={() => handleDecrement(row.id, row.count)}
+                              onClick={() => handleDecrement(index)}
                             >
                               -
                             </IconButton>
@@ -184,7 +212,7 @@ export default function CartPage() {
                                   backgroundColor: "var(--secondary)",
                                 },
                               }}
-                              onClick={() => handleIncrement(row.id, row.count)}
+                              onClick={() => handleIncrement(index)}
                             >
                               +
                             </IconButton>
@@ -200,7 +228,7 @@ export default function CartPage() {
                           <IconButton
                             size="small"
                             sx={{ color: "red" }}
-                            onClick={() => removeFromCart(row.id)}
+                            onClick={() => handleRemove(index)}
                           >
                             <Delete />
                           </IconButton>
@@ -236,7 +264,7 @@ export default function CartPage() {
                   fontSize={14}
                   fontWeight={700}
                 >
-                  Total: ₹{totalPrice}
+                  Total: ₹{total}
                 </Typography>
 
                 <Stack gap={2}>

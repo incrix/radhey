@@ -4,9 +4,36 @@ import Fab from "@mui/material/Fab";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+
+const StyledBadge = styled(Badge)(() => ({
+  "& .MuiBadge-badge": {
+    border: `2px solid var(--secondary)`,
+    background: "var(--secondary)",
+    padding: "0 2px",
+  },
+}));
 
 export default function PdfCartFloating() {
   const router = useRouter();
+  const [cartCount, setCartCount] = useState(1);
+
+  useEffect(() => {
+    setCartCount(
+      localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart")).length
+        : 0
+    );
+    setInterval(() => {
+      setCartCount(
+        localStorage.getItem("cart")
+          ? JSON.parse(localStorage.getItem("cart")).length
+          : 0
+      );
+    }, 500);
+  }, []);
 
   const handlePdfDownload = async () => {
     const pdfUrl = "https://e-com.incrix.com/Radhey/RadheyThunders(2025%20Pricelist).pdf";
@@ -104,12 +131,15 @@ export default function PdfCartFloating() {
       </Fab>
 
       {/* Cart Button */}
+      
       <Fab
         aria-label="cart"
         onClick={() => router.push("/Cart")}
         sx={borderBeamStyle("#4dd2ff", "var(--primary)", "0.3s")} // 🔵 blue glow, staggered float
       >
-        <ShoppingCartIcon />
+        <StyledBadge badgeContent={cartCount}>
+          <ShoppingCartIcon />
+        </StyledBadge>
       </Fab>
     </Stack>
   );

@@ -17,14 +17,12 @@ import NavBar from "@/src/app/Components/HomePage/navBar";
 import Footer from "@/src/app/Components/HomePage/footer";
 import Image from "next/image";
 import { useProducts } from "@/src/app/context/ProductContext";
-import { useCart } from "@/src/app/context/CartContext";
 
 export default function ProductPage() {
   const searchParams = useSearchParams();
   const search = searchParams.get("id");
   const router = useRouter();
-  const { productList, loading } = useProducts(); // ✅ from ProductContext
-  const { addToCart } = useCart(); // ✅ from CartContext
+  const { productList, loading } = useProducts();
 
   const [product, setProduct] = useState(null);
   const [itemCount, setItemCount] = useState(1);
@@ -279,7 +277,19 @@ export default function ProductPage() {
                           backgroundColor: "var(--tertiary)",
                         },
                       }}
-                      onClick={() => addToCart(product, itemCount)}
+                      onClick={() => {
+                        let cart =
+                          JSON.parse(localStorage.getItem("cart")) || [];
+                        let item = cart.filter(
+                          (item) => item.id == product.id
+                        )[0];
+                        if (item) {
+                          item.count += itemCount;
+                        } else {
+                          cart.push({ ...product, count: itemCount });
+                        }
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                      }}
                     >
                       Add to Cart
                     </Button>

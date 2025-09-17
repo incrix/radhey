@@ -22,7 +22,6 @@ import Logo from "@/public/Images/radheyLogo.png";
 import CustomButton from "@/src/app/Ui/Button/Button";
 import { useRouter, usePathname } from "next/navigation";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
-import { useCart } from "@/src/app/context/CartContext";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -32,11 +31,25 @@ const navLinks = [
 
 export default function NavBar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const { cart } = useCart(); // ✅ use CartContext
-  const cartCount = cart.length;
+  const [cartCount, setCartCount] = useState(1);
   const router = useRouter();
   const toggleDrawer = (open) => () => setDrawerOpen(open);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setCartCount(
+      localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart")).length
+        : 0
+    );
+    setInterval(() => {
+      setCartCount(
+        localStorage.getItem("cart")
+          ? JSON.parse(localStorage.getItem("cart")).length
+          : 0
+      );
+    }, 500);
+  }, []);
 
   return (
     <AppBar
