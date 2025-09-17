@@ -17,6 +17,7 @@ import NavBar from "@/src/app/Components/HomePage/navBar";
 import Footer from "@/src/app/Components/HomePage/footer";
 import Image from "next/image";
 import { useProducts } from "@/src/app/context/ProductContext";
+import PdfCartFloating from "@/src/app/Components/FloatingIcons/pdfCartFloating";
 
 export default function ProductPage() {
   const searchParams = useSearchParams();
@@ -448,6 +449,7 @@ export default function ProductPage() {
           </Stack>
         </Stack>
       </Stack>
+      <PdfCartFloating />
       <Footer />
     </Stack>
   );
